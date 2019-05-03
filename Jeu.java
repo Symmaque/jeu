@@ -13,7 +13,7 @@ class Jeu{
 		System.out.println();
 		Plateau p= new Plateau(joueur1, joueur2, 10);
 		affichePlateau(p);
-		// GIT
+
 		//ajouter info sur le déroulement du jeu 
 		int action=2;
 		String reponse;
@@ -39,20 +39,25 @@ class Jeu{
 			action=2;
 			while(action != 0){
 				System.out.println("Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
-				if(sc.nextLine().equals("se deplacer")){
-					p.bougeJoueur(joueur2, joueur1);
-					affichePlateau(p);
-					action--;
-				} else if(sc.nextLine().equals("se soigner")){
-					p.getPersonnage2().soigner(joueur2.getClasse().getBonusvie());
-					affichePlateau(p);
-					action--;
-				}else if(sc.nextLine().equals("attaquer")){
-					affichePlateau(p);
-					action--;
-				}else if(sc.nextLine().equals("se proteger")){
-					affichePlateau(p);
-					action--;
+				switch (sc.nextLine()) {
+					case "se deplacer":
+						p.bougeJoueur(joueur2, joueur1);
+						affichePlateau(p);
+						action--;
+						break;
+					case "se soigner":
+						p.getPersonnage2().soigner(joueur2.getClasse().getBonusvie());
+						affichePlateau(p);
+						action--;
+						break;
+					case "attaquer":
+						affichePlateau(p);
+						action--;
+						break;
+					case "se proteger":
+						affichePlateau(p);
+						action--;
+						break;
 				}
 			}
 			action=2;
@@ -83,7 +88,7 @@ class Jeu{
 			System.out.println(" Choississez une classe parmis ... ");
 			Classe classe= new Classe(sc.nextLine());
 			System.out.println(" choississez une race parmis ...");
-			Race race= new Race(sc.nextLine());
+			Race race= new Race(sc.nextInt());
 			System.out.println(" choississez une arme parmis ...");
 			Arme arme= new Arme(sc.nextLine());
 			System.out.println("vous avez 24 points à répartir dans les atàtribut max 10");
