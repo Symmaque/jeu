@@ -13,7 +13,7 @@ class Jeu{
 		System.out.println();
 		Plateau p= new Plateau(joueur1, joueur2, 10);
 		affichePlateau(p);
-		
+		// GIT
 		//ajouter info sur le déroulement du jeu 
 		int action=2;
 		String reponse;
