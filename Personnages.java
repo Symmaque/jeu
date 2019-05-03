@@ -2,7 +2,6 @@ import java.util.Scanner;
 class Personnages{
 	private String nom;
 	private Race race;
-	private Arme arme;
 	private Classe classe;
 	private int force;
 	private int dexterite; 
@@ -12,10 +11,9 @@ class Personnages{
 	private int x;
 	private int y;
 	
-	public Personnages(String nom, Race race,Classe classe, Arme arme, int force, int dexterite, int vie, int intelligence, int x, int y){
+	public Personnages(String nom, Race race,Classe classe, int force, int dexterite, int vie, int intelligence, int x, int y){
 		this.nom=nom;
 		this.race=race;
-		this.arme=arme;
 		this.classe=classe;
 		this.force=force;
 		this.dexterite=dexterite;
@@ -76,7 +74,7 @@ class Personnages{
 	}
 	
 	public String toString(){
-		String s= "Carte du personnage: Nom: "+ this.nom+ " ,Raca: "+this.race.getNom()+" ,classe: "+this.classe.getNom()+" ,arme: "+this.arme.getNom()+" ,attribut: "+this.force+"force,"+this.dexterite+"dexterite"+this.intelligence+"intelligence"+this.vie+"vie";
+		String s= "Carte du personnage: Nom: "+ this.nom+ " ,Race: "+this.race.getNom()+" ,classe: "+this.classe.getNom()+" ,attribut: "+this.force+"force,"+this.dexterite+"dexterite"+this.intelligence+"intelligence"+this.vie+"vie";
 		return s;
 	}
 	
