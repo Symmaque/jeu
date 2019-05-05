@@ -67,7 +67,7 @@ class Jeu{
 		System.out.println("Le jeu est fini");
 		
 	}
-	
+
 	private static void affichePlateau(Plateau p){
 		char [][] plateau= p.getPlateau();
 		for(int i=0; i<plateau.length; i++){

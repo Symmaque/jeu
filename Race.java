@@ -21,6 +21,7 @@ abstract class Race{
 	public String getNom(){
 		return this.nom;
 	}
+
 	public int getBonusforce(){
 		return this.bonusforce;
 	}
@@ -33,8 +34,6 @@ abstract class Race{
 		return bonusvie;
 	}
 
-	public int getBonusdexterite() {
-		return bonusdexterite;
-	}
+	public int getBonusdexterite() { return bonusdexterite; }
 }
 
