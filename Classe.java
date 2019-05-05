@@ -1,16 +1,20 @@
-class Classe {
-	private String nom;
-	private int attaqueEpee;
-	private int attaqueLance;
-	private int attaqueArc;
-	private int attaqueFeu;
+abstract class Classe {
+	protected String nom;
+	protected String NOM_1 = "Paladin";
+	protected String NOM_2 = "Guerrier";
+	protected String NOM_3 = "Archer";
+	protected String NOM_4 = "Magicien";
+	protected boolean attaqueEpee;
+	protected boolean attaqueLance;
+	protected boolean attaqueArc;
+	protected boolean attaqueFeu;
 
 	public Classe() {
 		this.nom = null;
-		this.attaqueEpee = 0;
-		this.attaqueLance = 0;
-		this.attaqueArc = 0;
-		this.attaqueFeu = 0;
+		this.attaqueEpee = false;
+		this.attaqueLance = false;
+		this.attaqueArc = false;
+		this.attaqueFeu = false;
 
 	}
 
@@ -19,22 +23,22 @@ class Classe {
 		return this.nom;
 	}
 
-	public int getAttaqueEpee() {
+	public boolean getAttaqueEpee() {
 
 		return this.attaqueEpee;
 	}
 
-	public int getAttaqueLance() {
+	public boolean getAttaqueLance() {
 
 		return this.attaqueLance;
 	}
 
-	public int getAttaqueArc() {
+	public boolean getAttaqueArc() {
 
 		return this.attaqueArc;
 	}
 
-	public int getAttaqueFeu() {
+	public boolean getAttaqueFeu() {
 		return this.attaqueFeu;
 	}
 }
