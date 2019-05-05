@@ -30,7 +30,7 @@ class Jeu{
 						action--;
 						break;
 					case "se soigner":
-						p.getPersonnage1().soigner(joueur1.getClasse().getbonusvie());
+						//p.getPersonnage1().soigner(joueur1.race.bonusvie().getbonusvie());
 						affichePlateau(p);
 						action--;
 						break;
@@ -51,7 +51,7 @@ class Jeu{
 						action -= 1;
 						break;
 					case "se soigner":
-						p.getPersonnage2().soigner(joueur2.getClasse().getBonusvie());
+						//p.getPersonnage2().soigner(joueur2.getClasse().getBonusvie());
 						affichePlateau(p);
 						action -= 1;
 						break;
@@ -81,6 +81,7 @@ class Jeu{
 	private static Personnages Creationpers(int ordre, int x, int y){
 		Scanner sc= new Scanner(System.in);
 		Race race;
+		Classe classe;
 		int point= 24;
 		int force=0;
 		int dexterite=0;
@@ -93,7 +94,31 @@ class Jeu{
 			System.out.println("Guerriers(2)");
 			System.out.println("Archers(3)");
 			System.out.println("Magiciens(4)");
-			//Classe classe= new Classe(sc.nextLine());
+
+			switch(sc.nextInt()){
+				case 1:
+					classe = new Paladin();
+					break;
+
+				case 2:
+					classe = new Guerrier();
+					break;
+
+				case 3:
+					classe = new Archer();
+					break;
+
+				case 4:
+					classe = new Magicien();
+					break;
+
+				default:
+					classe = null;
+
+			}
+			System.out.println(nom+" combat avec un "+classe.getNom());
+
+
 			System.out.println(" Voulez-vous jouer avec ");
 			System.out.println("un Elfe(1)");
 		    System.out.println("un Homme(2)");
@@ -103,27 +128,25 @@ class Jeu{
 		switch(sc.nextInt()){
 			case 1:
 				race = new Elfe();
-				System.out.println(nom+" combat avec un "+race.getNom());
 				break;
 
 			case 2:
 				race = new Homme();
-				System.out.println(nom+" combat avec un "+race.getNom());
 				break;
 
 			case 3:
 				race = new Nain();
-				System.out.println(nom+" combat avec un "+race.getNom());
 				break;
 
 			case 4:
 				race = new Orque();
-				System.out.println(nom+" combat avec un "+race.getNom());
 				break;
+
 			default:
 				race = null;
-				System.out.println("Vous n'avez pas de race");
+
 		}
+		System.out.println(nom+" combat avec un "+race.getNom());
 
 
 			System.out.println("Vous avez 24 points à repartir dans les attributs max 10");
