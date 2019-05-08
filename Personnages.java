@@ -74,7 +74,7 @@ class Personnages{
 	}
 	
 	public String toString(){
-		String s= "Carte du personnage: Nom: "+ this.nom+ " ,Race: "+this.race.getNom()+" ,classe: "+this.classe.getNom()+" ,attribut: "+this.force+"force,"+this.dexterite+"dexterite"+this.intelligence+"intelligence"+this.vie+"vie";
+		String s= "Carte du personnage: Nom: "+ this.nom+ " ,Race: "+this.race.getNom()+" ,classe: "+this.classe.getNom()+" ,attribut: "+this.force+" en force, "+this.dexterite+" en dexterite, "+this.intelligence+" en intelligence, "+this.vie+" en vie.";
 		return s;
 	}
 	
