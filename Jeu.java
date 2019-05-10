@@ -19,10 +19,9 @@ class Jeu{
 
 		//ajouter info sur le déroulement du jeu
 		int action=2;
-		String reponse;
-		while(p.getPersonnage1().getVie()>0 && p.getPersonnage2().getVie()>0){
-			while(action != 0){
-				System.out.println("Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
+		while(joueur1.getVie()>0 && joueur2.getVie()>0){
+			while((action != 0)&&(joueur1.getVie()>0)&&(joueur2.getVie()>0)){
+				System.out.println(joueur1.getNom()+" Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
 				switch (sc.nextLine()) {
 					case "se deplacer":
 						p.bougeJoueur(joueur1, joueur2);
@@ -30,12 +29,16 @@ class Jeu{
                         break;
 					case "se soigner":
 						p.soignerJoueur(joueur1);
+						System.out.println(joueur1.getNom()+" a maintenant "+joueur1.getVie()+" de vie.");
 						action--;
 						break;
 					case "attaquer":
 						p.attaqueJoueur(joueur1, joueur2);
+						System.out.println(joueur1.getNom()+" attaque avec "+joueur1.getClasse().getArme());
+						if (joueur2.getVie()>0){
+							System.out.println(joueur2.getNom()+" a maintenant "+joueur2.getVie()+" de vie.");
+						}
                         action --;
-
                         break;
 
 					case "se proteger":
@@ -44,43 +47,64 @@ class Jeu{
 
 						break;
 				}
-				affichePlateau(p);
+				if (joueur2.getVie()>0){
+					affichePlateau(p);
+				}
+
+
 			}
 			action=2;
-			while(action != 0){
-				System.out.println("Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
+			while((action != 0)&&(joueur1.getVie()>0)&&(joueur2.getVie()>0)){
+				System.out.println(joueur2.getNom()+" Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
 				switch (sc.nextLine()) {
 					case "se deplacer":
 						p.bougeJoueur(joueur2, joueur1);
-						action -= 1;
+						action --;
                         break;
 					case "se soigner":
 						p.soignerJoueur(joueur2);
-						action -= 1;
+						System.out.println(joueur2.getNom()+" a maintenant "+joueur2.getVie()+" de vie.");
+						action --;
+
 						break;
 					case "attaquer":
 						p.attaqueJoueur(joueur2, joueur1);
-						action -= 1;
+						System.out.println(joueur2.getNom()+" attaque avec "+joueur2.getClasse().getArme());
+						if(joueur1.getVie()>0) {
+							System.out.println(joueur1.getNom() + " a maintenant " + joueur1.getVie() + " de vie.");
+						}
+						action --;
 						break;
 					case "se proteger":
-						action -= 1;
+						action --;
 						break;
 				}
-				affichePlateau(p);
+				if(joueur1.getVie()>0){
+					affichePlateau(p);
+				}
+
 			}
 			action=2;
 		}
 		System.out.println("Le jeu est fini");
+		if(joueur1.getVie()<joueur2.getVie()) {
+			System.out.println(joueur2.getNom() + " a gagné.");
+		}
+		else{
+			System.out.println(joueur1.getNom()+" a gagné.");
+		}
 		
 	}
 
 	private static void affichePlateau(Plateau p){
+
 		char [][] plateau= p.getPlateau();
 		for(int i=0; i<plateau.length; i++){
 			for(int j=0; j<plateau[i].length;j++){
 				System.out.print(plateau[i][j]);
 			}
 			System.out.println();
+
 		}
 	}
 		

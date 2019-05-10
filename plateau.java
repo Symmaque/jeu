@@ -77,7 +77,7 @@ class Plateau{
 	}
 
 	public void soignerJoueur(Personnages joueur){
-		joueur.soigner(joueur.getRace().getBonusvie());
+		joueur.soigner(joueur.getRace().getBonusvie()+10);
 	}
 	
 	public void miseajourPlateau(Personnages joueurquibouge, Personnages joueurfixe){

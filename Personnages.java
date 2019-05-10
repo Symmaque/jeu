@@ -20,7 +20,7 @@ class Personnages{
 		this.force=force + this.race.getBonusforce() ;
 		this.dexterite=dexterite + this.race.getBonusdexterite();
 		this.vie=vie+ this.race.getBonusvie();
-		this.viemax = vie;
+		this.viemax = this.vie;
 		this.intelligence=intelligence+ this.race.getBonusintelligence();
 		this.x=x;
 		this.y=y;
@@ -50,7 +50,7 @@ class Personnages{
 		return this.vie;
 	}
 	public int getViemax(){
-		return this.viemax;
+		return viemax;
 	}
 
 	public int getDexterite() {
@@ -84,12 +84,12 @@ class Personnages{
 	    return this.nom;
     }
 	
-	public void perteVie(int degat){
-		this.vie= this.vie - degat;
+	public void perteVie(int degats){
+		this.vie= this.vie - degats;
 	}
 	
 	public void soigner(int heal){
-		int difference=this.viemax-this.vie;
+		int difference=viemax-this.vie;
 		if(this.vie<this.viemax){
 			if(heal>=difference){
 				this.vie=this.viemax;
@@ -103,9 +103,9 @@ class Personnages{
 		if(attaquePossible){
 			return this.attaque + this.getForce();
 		}
+		System.out.println("L'attaque a échoué");
 		return 0;
 	}
-
 
 
 	public String toString(){
