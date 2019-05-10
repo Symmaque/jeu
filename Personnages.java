@@ -22,6 +22,8 @@ class Personnages{
 		this.intelligence=intelligence+ this.race.getBonusintelligence();
 		this.x=x;
 		this.y=y;
+
+		
 	}
 	
 	public void bouge(boolean mvtpossible, String a){
