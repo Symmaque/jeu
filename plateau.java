@@ -40,22 +40,22 @@ class Plateau{
 	
 	public void bougeJoueur(Personnages joueurquibouge, Personnages joueurfixe){
 		Scanner sc= new Scanner(System.in);
-		System.out.println("Ou voulez vous aller, haut, bas, droite, gauche, rester ? ");
-		String a= sc.nextLine();
+		System.out.println("Ou voulez vous aller, haut (0), bas (1), droite (2), gauche (3), rester (4) ? ");
+		int a= sc.nextInt();
 		boolean mvtpossible= true;
-		if(a.equals("haut")){
+		if(a==0){
 				if(joueurquibouge.getX()-1==joueurfixe.getX()){
 					mvtpossible=false;
 				}
-			} else if(a.equals("bas")){
+			} else if(a==1){
 				if(joueurquibouge.getX()+1==joueurfixe.getX()){
 					mvtpossible=false;
 				}
-			} else if(a.equals("gauche")){
+			} else if(a==2){
 				if(joueurquibouge.getY()-1==joueurfixe.getY()){
 					mvtpossible=false;
 				}
-			} else if(a.equals("droite")){
+			} else if(a==3){
 				if(joueurquibouge.getY()+1==joueurfixe.getY()){
 					mvtpossible=false;
 				}
@@ -64,6 +64,16 @@ class Plateau{
 		
 		joueurquibouge.bouge(mvtpossible, a);
 		miseajourPlateau(joueurquibouge, joueurfixe);
+	}
+
+	public void attaqueJoueur(Personnages joueurquiattaque, Personnages joueurquisedefend) {
+		boolean attaquePossible;
+
+
+		attaquePossible = !(Math.random() - (joueurquiattaque.getDexterite()) / (joueurquiattaque.getDexterite() + joueurquisedefend.getDexterite()) < 0.2);
+
+
+		joueurquisedefend.perteVie(joueurquiattaque.attaquer(attaquePossible));
 	}
 	
 	public void miseajourPlateau(Personnages joueurquibouge, Personnages joueurfixe){

@@ -10,29 +10,33 @@ class Personnages{
 	private int intelligence;
 	private int x;
 	private int y;
+	private int attaque;
 	
 	public Personnages(String nom, Race race,Classe classe, int force, int dexterite, int vie, int intelligence, int x, int y){
 		this.nom=nom;
 		this.race=race;
 		this.classe=classe;
-		this.force=force;
-		this.dexterite=dexterite;
-		this.vie=vie;
+		this.attaque = classe.attaque;
+		this.force=force + this.race.getBonusforce() ;
+		this.dexterite=dexterite + this.race.getBonusdexterite();
+		this.vie=vie+ this.race.getBonusvie();
 		this.viemax = vie;
-		this.intelligence=intelligence;
+		this.intelligence=intelligence+ this.race.getBonusintelligence();
 		this.x=x;
 		this.y=y;
+
+
 	}
 	
-	public void bouge(boolean mvtpossible, String a){
+	public void bouge(boolean mvtpossible, int a){
 		if(mvtpossible){
-			if(a.equals("haut") && (this.getX()-1)<=14){
+			if(a==0 && (this.getX()-1)<=14){
 				this.x--;
-			} else if(a.equals("bas") && (this.getX()+1)>=5){
+			} else if(a==1 && (this.getX()+1)>=5){
 				this.x++;
-			} else if(a.equals("gauche") && (this.getY()-1)>=5){
+			} else if(a==3 && (this.getY()-1)>=5){
 				this.y--;
-			} else if(a.equals("droite") && (this.getY()+1)<=14){
+			} else if(a==2 && (this.getY()+1)<=14){
 				this.y++;
 			}else {
 				System.out.println("Vous ne bougez pas");
@@ -48,6 +52,20 @@ class Personnages{
 	public int getViemax(){
 		return this.viemax;
 	}
+
+	public int getDexterite() {
+		return dexterite;
+	}
+
+	public int getForce() {
+		return force;
+	}
+
+	public int getIntelligence() {
+		return intelligence;
+	}
+
+
 	public int getX(){
 		return this.x;
 	}
@@ -57,6 +75,9 @@ class Personnages{
 	public Classe getClasse(){
 		return this.classe;
 	}
+	public String getNom(){
+	    return this.nom;
+    }
 	
 	public void perteVie(int degat){
 		this.vie= this.vie - degat;
@@ -72,9 +93,18 @@ class Personnages{
 			}
 		}
 	}
-	
+
+	public int attaquer(boolean attaquePossible){
+		if(attaquePossible){
+			return this.attaque + this.getForce();
+		}
+		return 0;
+	}
+
+
+
 	public String toString(){
-		String s= "Carte du personnage: Nom: "+ this.nom+ " ,Race: "+this.race.getNom()+" ,classe: "+this.classe.getNom()+" ,attribut: "+this.force+"force,"+this.dexterite+"dexterite"+this.intelligence+"intelligence"+this.vie+"vie";
+		String s= "Carte du personnage: Nom: "+ this.nom+ " ,Race: "+this.race.getNom()+" ,classe: "+this.classe.getNom()+" ,attribut: "+this.force+" en force, "+this.dexterite+" en dexterite, "+this.intelligence+" en intelligence, "+this.vie+" en vie.";
 		return s;
 	}
 	

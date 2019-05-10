@@ -1,5 +1,6 @@
 abstract class Classe {
 	protected String nom;
+	protected int attaque;
 	protected String NOM_1 = "Paladin";
 	protected String NOM_2 = "Guerrier";
 	protected String NOM_3 = "Archer";
@@ -15,6 +16,7 @@ abstract class Classe {
 		this.attaqueLance = false;
 		this.attaqueArc = false;
 		this.attaqueFeu = false;
+		this.attaque = 0;
 
 	}
 
