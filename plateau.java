@@ -65,6 +65,16 @@ class Plateau{
 		joueurquibouge.bouge(mvtpossible, a);
 		miseajourPlateau(joueurquibouge, joueurfixe);
 	}
+
+	public void attaqueJoueur(Personnages joueurquiattaque, Personnages joueurquisedefend) {
+		boolean attaquePossible;
+
+
+		attaquePossible = !(Math.random() - (joueurquiattaque.getDexterite()) / (joueurquiattaque.getDexterite() + joueurquisedefend.getDexterite()) < 0.2);
+
+
+		joueurquisedefend.perteVie(joueurquiattaque.attaquer(attaquePossible));
+	}
 	
 	public void miseajourPlateau(Personnages joueurquibouge, Personnages joueurfixe){
 		if (this.j1.equals(joueurquibouge)){

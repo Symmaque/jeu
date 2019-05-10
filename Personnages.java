@@ -10,11 +10,13 @@ class Personnages{
 	private int intelligence;
 	private int x;
 	private int y;
+	private int attaque;
 	
 	public Personnages(String nom, Race race,Classe classe, int force, int dexterite, int vie, int intelligence, int x, int y){
 		this.nom=nom;
 		this.race=race;
 		this.classe=classe;
+		this.attaque = classe.attaque;
 		this.force=force + this.race.getBonusforce() ;
 		this.dexterite=dexterite + this.race.getBonusdexterite();
 		this.vie=vie+ this.race.getBonusvie();
@@ -50,6 +52,20 @@ class Personnages{
 	public int getViemax(){
 		return this.viemax;
 	}
+
+	public int getDexterite() {
+		return dexterite;
+	}
+
+	public int getForce() {
+		return force;
+	}
+
+	public int getIntelligence() {
+		return intelligence;
+	}
+
+
 	public int getX(){
 		return this.x;
 	}
@@ -77,7 +93,16 @@ class Personnages{
 			}
 		}
 	}
-	
+
+	public int attaquer(boolean attaquePossible){
+		if(attaquePossible){
+			return this.attaque + this.getForce();
+		}
+		return 0;
+	}
+
+
+
 	public String toString(){
 		String s= "Carte du personnage: Nom: "+ this.nom+ " ,Race: "+this.race.getNom()+" ,classe: "+this.classe.getNom()+" ,attribut: "+this.force+" en force, "+this.dexterite+" en dexterite, "+this.intelligence+" en intelligence, "+this.vie+" en vie.";
 		return s;
