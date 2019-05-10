@@ -23,18 +23,18 @@ class Personnages{
 		this.x=x;
 		this.y=y;
 
-		
+
 	}
 	
-	public void bouge(boolean mvtpossible, String a){
+	public void bouge(boolean mvtpossible, int a){
 		if(mvtpossible){
-			if(a.equals("haut") && (this.getX()-1)<=14){
+			if(a==0 && (this.getX()-1)<=14){
 				this.x--;
-			} else if(a.equals("bas") && (this.getX()+1)>=5){
+			} else if(a==1 && (this.getX()+1)>=5){
 				this.x++;
-			} else if(a.equals("gauche") && (this.getY()-1)>=5){
+			} else if(a==3 && (this.getY()-1)>=5){
 				this.y--;
-			} else if(a.equals("droite") && (this.getY()+1)<=14){
+			} else if(a==2 && (this.getY()+1)<=14){
 				this.y++;
 			}else {
 				System.out.println("Vous ne bougez pas");
@@ -59,6 +59,9 @@ class Personnages{
 	public Classe getClasse(){
 		return this.classe;
 	}
+	public String getNom(){
+	    return this.nom;
+    }
 	
 	public void perteVie(int degat){
 		this.vie= this.vie - degat;
