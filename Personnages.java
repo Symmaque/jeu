@@ -15,11 +15,11 @@ class Personnages{
 		this.nom=nom;
 		this.race=race;
 		this.classe=classe;
-		this.force=force;
-		this.dexterite=dexterite;
-		this.vie=vie;
+		this.force=force + this.race.getBonusforce() ;
+		this.dexterite=dexterite + this.race.getBonusdexterite();
+		this.vie=vie+ this.race.getBonusvie();
 		this.viemax = vie;
-		this.intelligence=intelligence;
+		this.intelligence=intelligence+ this.race.getBonusintelligence();
 		this.x=x;
 		this.y=y;
 	}
