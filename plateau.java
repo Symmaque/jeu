@@ -75,6 +75,10 @@ class Plateau{
 
 		joueurquisedefend.perteVie(joueurquiattaque.attaquer(attaquePossible));
 	}
+
+	public void soignerJoueur(Personnages joueur){
+		joueur.soigner(joueur.getRace().getBonusvie());
+	}
 	
 	public void miseajourPlateau(Personnages joueurquibouge, Personnages joueurfixe){
 		if (this.j1.equals(joueurquibouge)){

@@ -75,6 +75,11 @@ class Personnages{
 	public Classe getClasse(){
 		return this.classe;
 	}
+
+	public Race getRace() {
+		return race;
+	}
+
 	public String getNom(){
 	    return this.nom;
     }

@@ -27,26 +27,24 @@ class Jeu{
 					case "se deplacer":
 						p.bougeJoueur(joueur1, joueur2);
 						action--;
-                        affichePlateau(p);
-						break;
+                        break;
 					case "se soigner":
-						//p.getPersonnage1().soigner(joueur1.race.bonusvie().getbonusvie());
-
+						p.soignerJoueur(joueur1);
 						action--;
-                        affichePlateau(p);
 						break;
 					case "attaquer":
 						p.attaqueJoueur(joueur1, joueur2);
                         action --;
-                        affichePlateau(p);
+
                         break;
 
 					case "se proteger":
 
 						action--;
-                        affichePlateau(p);
+
 						break;
 				}
+				affichePlateau(p);
 			}
 			action=2;
 			while(action != 0){
@@ -55,24 +53,20 @@ class Jeu{
 					case "se deplacer":
 						p.bougeJoueur(joueur2, joueur1);
 						action -= 1;
-                        affichePlateau(p);
-						break;
+                        break;
 					case "se soigner":
-						//p.getPersonnage2().soigner(joueur2.getClasse().getBonusvie());
-
+						p.soignerJoueur(joueur2);
 						action -= 1;
-                        affichePlateau(p);
 						break;
 					case "attaquer":
 						p.attaqueJoueur(joueur2, joueur1);
 						action -= 1;
-                        affichePlateau(p);
 						break;
 					case "se proteger":
 						action -= 1;
-                        affichePlateau(p);
 						break;
 				}
+				affichePlateau(p);
 			}
 			action=2;
 		}
