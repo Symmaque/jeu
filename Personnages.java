@@ -19,7 +19,7 @@ class Personnages{
 		this.attaque = classe.attaque;
 		this.force=force + this.race.getBonusforce() ;
 		this.dexterite=dexterite + this.race.getBonusdexterite();
-		this.vie=vie+ this.race.getBonusvie();
+		this.vie=100 + vie + this.race.getBonusvie();
 		this.viemax = this.vie;
 		this.intelligence=intelligence+ this.race.getBonusintelligence();
 		this.x=x;

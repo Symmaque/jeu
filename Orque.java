@@ -4,7 +4,7 @@ public class Orque extends Race {
         this.bonusdexterite = -20;
         this.bonusforce = 15;
         this.bonusintelligence = -40;
-        this.bonusvie = 10;
+        this.bonusvie = 30;
 
     }
 }
