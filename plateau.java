@@ -70,7 +70,7 @@ class Plateau{
 		boolean attaquePossible;
 
 
-		attaquePossible = ((Math.random() - ((joueurquiattaque.getDexterite()) / (joueurquiattaque.getDexterite() + joueurquisedefend.getDexterite()))) > 0.2);
+		attaquePossible = ((Math.random() - ((Math.pow(joueurquiattaque.getDexterite(), 1/3)-Math.pow(joueurquisedefend.getDexterite(), 1/3)) / Math.pow(joueurquiattaque.getDexterite() + joueurquisedefend.getDexterite(), 1/2))) > 0.5);
 
 
 		joueurquisedefend.perteVie(joueurquiattaque.attaquer(attaquePossible));

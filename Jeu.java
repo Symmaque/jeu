@@ -2,6 +2,7 @@ import java.util.Scanner;
 class Jeu{
 	public static void main (String [] arg){
 		Scanner sc= new Scanner(System.in);
+		int action;
 
 
 		/*Personnages test= new Personnages("moi", "homme", "guerrier", "epee", 10, 1, 2, 4);
@@ -18,7 +19,12 @@ class Jeu{
 
 
 		//ajouter info sur le déroulement du jeu
-		int action=2;
+		if(joueur1.getIntelligence()<joueur2.getIntelligence()){
+			action = 0;
+		}
+		else{
+			action = 2 + (joueur1.getIntelligence()/joueur2.getIntelligence());
+		}
 		while(joueur1.getVie()>0 && joueur2.getVie()>0){
 			while((action != 0)&&(joueur1.getVie()>0)&&(joueur2.getVie()>0)){
 				System.out.println(joueur1.getNom()+" Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
@@ -53,7 +59,7 @@ class Jeu{
 
 
 			}
-			action=2;
+			action=2 + (joueur2.getIntelligence()/joueur1.getIntelligence());
 			while((action != 0)&&(joueur1.getVie()>0)&&(joueur2.getVie()>0)){
 				System.out.println(joueur2.getNom()+" Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
 				switch (sc.nextLine()) {
@@ -84,7 +90,7 @@ class Jeu{
 				}
 
 			}
-			action=2;
+			action=2 + (joueur1.getIntelligence()/joueur2.getIntelligence());
 		}
 		System.out.println("Le jeu est fini");
 		if(joueur1.getVie()<joueur2.getVie()) {

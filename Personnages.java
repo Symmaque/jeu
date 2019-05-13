@@ -20,7 +20,7 @@ class Personnages{
 		this.force=force + this.race.getBonusforce() ;
 		this.dexterite=dexterite + this.race.getBonusdexterite();
 		this.vie=100 + vie + this.race.getBonusvie();
-		this.viemax = this.vie;
+		this.viemax = 100 + vie + this.race.getBonusvie();
 		this.intelligence=intelligence+ this.race.getBonusintelligence();
 		this.x=x;
 		this.y=y;
@@ -89,12 +89,12 @@ class Personnages{
 	}
 	
 	public void soigner(int heal){
-		int difference=viemax-this.vie;
-		if(this.vie<this.viemax){
+		int difference=this.viemax-this.vie;
+		if(difference>0){
 			if(heal>=difference){
-				this.vie=this.viemax;
+				this.vie+= difference;
 			} else{
-				this.vie=this.vie + heal;
+				this.vie+= heal;
 			}
 		}
 	}
