@@ -1,4 +1,3 @@
-import java.util.Scanner;
 class Personnages{
 	private String nom;
 	private Race race;
@@ -11,6 +10,7 @@ class Personnages{
 	private int x;
 	private int y;
 	private int attaque;
+	private int action;
 	
 	public Personnages(String nom, Race race,Classe classe, int force, int dexterite, int vie, int intelligence, int x, int y){
 		this.nom=nom;
@@ -99,8 +99,21 @@ class Personnages{
 		}
 	}
 
+	public void setAction(int pointsAction){
+		this.action = pointsAction;
+	}
+
+	public int getAction() {
+		return action;
+	}
+
+	public void perteAction(int pertes){
+		this.action = this.action - pertes;
+	}
+
 	public int attaquer(boolean attaquePossible){
 		if(attaquePossible){
+			System.out.println(this.getNom() + " attaque avec " + this.getClasse().getArme());
 			return this.attaque + this.getForce();
 		}
 		System.out.println("L'attaque a échoué");

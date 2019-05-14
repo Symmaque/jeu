@@ -67,17 +67,20 @@ class Plateau{
 	}
 
 	public void attaqueJoueur(Personnages joueurquiattaque, Personnages joueurquisedefend) {
-		boolean attaquePossible;
+		boolean attaqueReussie;
+		// definir un booleen porteSuffisante et ne pas oublier de l'inclure ds la fonction personnage.attaquer
 
 
-		attaquePossible = ((Math.random() - ((Math.pow(joueurquiattaque.getDexterite(), 1/3)-Math.pow(joueurquisedefend.getDexterite(), 1/3)) / Math.pow(joueurquiattaque.getDexterite() + joueurquisedefend.getDexterite(), 1/2))) > 0.5);
+		attaqueReussie = ((Math.random() - ((Math.pow(joueurquiattaque.getDexterite(), 1/3)-Math.pow(joueurquisedefend.getDexterite(), 1/3)) / Math.pow((0.8*joueurquiattaque.getDexterite()) + joueurquisedefend.getDexterite(), 1/2))) > 0.5);
 
 
-		joueurquisedefend.perteVie(joueurquiattaque.attaquer(attaquePossible));
+		joueurquisedefend.perteVie(joueurquiattaque.attaquer(attaqueReussie));
+
 	}
 
 	public void soignerJoueur(Personnages joueur){
 		joueur.soigner(joueur.getRace().getBonusvie()+10);
+		System.out.println(joueur.getNom() + " a maintenant " + joueur.getVie() + " de vie.");
 	}
 	
 	public void miseajourPlateau(Personnages joueurquibouge, Personnages joueurfixe){
