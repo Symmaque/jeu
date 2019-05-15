@@ -96,7 +96,7 @@ class Jeu{
 
 			}
 
-			joueur1.setAction(2 + (joueur1.getIntelligence() / 2*joueur2.getIntelligence()));
+			joueur1.setAction(2 + (joueur1.getIntelligence() / (2*joueur2.getIntelligence())));
 
 		}
 
