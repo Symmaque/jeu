@@ -45,6 +45,7 @@ class Personnages{
 			System.out.println("Vous ne bougez pas");
 		}
 	}
+
 	
 	public int getVie(){
 		return this.vie;

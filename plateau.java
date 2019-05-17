@@ -68,7 +68,9 @@ class Plateau{
 
 	public void attaqueJoueur(Personnages joueurquiattaque, Personnages joueurquisedefend) {
 		boolean attaqueReussie;
-		// definir un booleen porteSuffisante et ne pas oublier de l'inclure ds la fonction personnage.attaquer
+		// definir un booleen porteeSuffisante et ne pas oublier de l'inclure ds la fonction personnage.attaquer
+		//porteesuffisante(joueurquiattaque.getClasse().getNom(), joueurquiattaque.getX(), joueurquiattaque.getY(), joueurquisedefend.getX(), joueurquisedefend.getY());
+
 
 
 		attaqueReussie = ((Math.random() - ((Math.pow(joueurquiattaque.getDexterite(), 1/3)-Math.pow(joueurquisedefend.getDexterite(), 1/3)) / Math.pow((0.8*joueurquiattaque.getDexterite()) + joueurquisedefend.getDexterite(), 1/2))) > 0.5);
@@ -90,7 +92,21 @@ class Plateau{
 			this.monde[joueurquibouge.getX()][joueurquibouge.getY()]='2';
 		}
 	}
-	
+
+	/*
+	public boolean porteesuffisante(String nomClasse, int x1, int y1, int x2, int y2){
+
+		switch(nomClasse){
+			case "Archer":
+				if x1
+
+		}
+
+
+
+	}
+
+	 */
 	public char[][] getPlateau(){
 		return this.monde;
 	}
