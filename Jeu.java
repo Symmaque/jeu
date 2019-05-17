@@ -66,7 +66,11 @@ class Jeu{
 						break;
 
 					case "se proteger":
-						joueur1.perteAction(1);
+						if(joueur1.getAction()!=1){
+							System.out.println("Vous ne pouvez pas vous proteger maintenant, le joueur ne va pas attaquer avant au moins un tour");
+						} else {
+							joueur1.perteAction(1);
+						}
 						break;
 				}
 				if (joueur2.getVie() > 0) {
