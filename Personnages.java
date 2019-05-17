@@ -1,4 +1,3 @@
-import java.util.Scanner;
 class Personnages{
 	private String nom;
 	private Race race;
@@ -11,6 +10,7 @@ class Personnages{
 	private int x;
 	private int y;
 	private int attaque;
+	private int action;
 	
 	public Personnages(String nom, Race race,Classe classe, int force, int dexterite, int vie, int intelligence, int x, int y){
 		this.nom=nom;
@@ -19,8 +19,8 @@ class Personnages{
 		this.attaque = classe.attaque;
 		this.force=force + this.race.getBonusforce() ;
 		this.dexterite=dexterite + this.race.getBonusdexterite();
-		this.vie=vie+ this.race.getBonusvie();
-		this.viemax = vie;
+		this.vie=100 + vie + this.race.getBonusvie();
+		this.viemax = 100 + vie + this.race.getBonusvie();
 		this.intelligence=intelligence+ this.race.getBonusintelligence();
 		this.x=x;
 		this.y=y;
@@ -45,12 +45,13 @@ class Personnages{
 			System.out.println("Vous ne bougez pas");
 		}
 	}
+
 	
 	public int getVie(){
 		return this.vie;
 	}
 	public int getViemax(){
-		return this.viemax;
+		return viemax;
 	}
 
 	public int getDexterite() {
@@ -75,31 +76,76 @@ class Personnages{
 	public Classe getClasse(){
 		return this.classe;
 	}
+
+	public Race getRace() {
+		return race;
+	}
+
 	public String getNom(){
 	    return this.nom;
     }
 	
-	public void perteVie(int degat){
-		this.vie= this.vie - degat;
+	public void perteVie(int degats){
+		this.vie= this.vie - degats;
 	}
 	
 	public void soigner(int heal){
 		int difference=this.viemax-this.vie;
-		if(this.vie<this.viemax){
-			if(heal>=difference){
-				this.vie=this.viemax;
+		if(difference>0){
+			if(heal>=difference && this.getIntelligence()>= (int)(Math.random()*60)){
+				this.vie+= difference;
 			} else{
-				this.vie=this.vie + heal;
+				this.vie+= heal;
 			}
 		}
 	}
 
+	public void setAction(int pointsAction){
+		this.action = pointsAction;
+	}
+
+	public int getAction() {
+		return action;
+	}
+
+	public void perteAction(int pertes){
+		this.action = this.action - pertes;
+	}
+
 	public int attaquer(boolean attaquePossible){
 		if(attaquePossible){
+			System.out.println(this.getNom() + " attaque avec " + this.getClasse().getArme());
 			return this.attaque + this.getForce();
 		}
+		System.out.println("L'attaque a été esquivée");
 		return 0;
 	}
+
+	public boolean porteeArcher(int x1, int y1, int x2, int y2){
+		int diffX = Math.abs(x1-x2);
+		int diffY = Math.abs(y1-y2);
+		return (((4<diffX)&&(diffX<10))&&((4<diffY)&&(diffY<10)));
+	}
+
+	public boolean porteePaladin(int x1, int y1, int x2, int y2){
+		int diffX = Math.abs(x1-x2);
+		int diffY = Math.abs(y1-y2);
+		return (((diffX<6)&&(diffY == 0))||((diffY<6)&&(diffX == 0)));
+	}
+
+	public boolean porteeGuerrier(int x1, int y1, int x2, int y2){
+		int diffX = Math.abs(x1-x2);
+		int diffY = Math.abs(y1-y2);
+		return ((diffX<5)&&(diffY<5));
+	}
+
+	public boolean porteeMagicien(int x1, int y1, int x2, int y2){
+		int diffX = Math.abs(x1-x2);
+		int diffY = Math.abs(y1-y2);
+		return (((diffX<7)&&(diffY<7))&&((diffX != 0)||(diffY != 0)));
+	}
+
+
 
 
 

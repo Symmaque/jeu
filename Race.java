@@ -3,7 +3,7 @@ abstract class Race{
 	protected final static  String NOM_1 = "Elfe";
     protected final static  String NOM_2 = "Homme";
     protected final static  String NOM_3 = "Nain";
-    protected final static  String NOM_4 = "Orque";
+    protected final static  String NOM_4 = "Orc";
 	protected int bonusforce;
 	protected int bonusintelligence;
 	protected int bonusvie;

@@ -1,92 +1,149 @@
 import java.util.Scanner;
+
 class Jeu{
-	public static void main (String [] arg){
-		Scanner sc= new Scanner(System.in);
+	public static void main (String [] arg) {
+		Scanner sc = new Scanner(System.in);
+		int action;
 
 
 		/*Personnages test= new Personnages("moi", "homme", "guerrier", "epee", 10, 1, 2, 4);
 		System.out.println(test);*/
 		//ajouter info création de personnage
-		Personnages joueur1 =Creationpers(1, 9, 5);
+		Personnages joueur1 = Creationpers(1, 9, 5);
 		System.out.println(joueur1);
 		System.out.println();
-		Personnages joueur2 =Creationpers(2, 10, 14);
+		Personnages joueur2 = Creationpers(2, 10, 14);
 		System.out.println(joueur2);
 		System.out.println();
-		Plateau p= new Plateau(joueur1, joueur2, 10);
+		Plateau p = new Plateau(joueur1, joueur2, 10);
 		affichePlateau(p);
 
 
 		//ajouter info sur le déroulement du jeu
-		int action=2;
-		String reponse;
-		while(p.getPersonnage1().getVie()>0 && p.getPersonnage2().getVie()>0){
-			while(action != 0){
-				System.out.println("Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
+
+
+		if (joueur1.getIntelligence() < joueur2.getIntelligence()) {
+			joueur1.setAction(0);                                                                         //le plus intelligent commence
+		} else {
+			if (2 + (joueur1.getIntelligence() / (2 * joueur2.getIntelligence()))<=5){
+				joueur1.setAction(2 + (joueur1.getIntelligence() / (2 * joueur2.getIntelligence())));
+			} else{
+				joueur1.setAction(4);
+			}
+
+		}
+
+
+
+		while (joueur1.getVie() > 0 && joueur2.getVie() > 0) {     //tant que les joueurs sont vivants
+
+			//tour du joueur 1
+
+			while ((joueur1.getAction() > 0) && (joueur1.getVie() > 0) && (joueur2.getVie() > 0)) {
+				System.out.println(joueur1.getNom() + " avez " + joueur1.getAction() + " points d'action");
+				System.out.println(joueur1.getNom() + " Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
 				switch (sc.nextLine()) {
 					case "se deplacer":
 						p.bougeJoueur(joueur1, joueur2);
-						action--;
-                        affichePlateau(p);
+						joueur1.perteAction(1);
 						break;
 					case "se soigner":
-						//p.getPersonnage1().soigner(joueur1.race.bonusvie().getbonusvie());
-
-						action--;
-                        affichePlateau(p);
+						p.soignerJoueur(joueur1);
+						joueur1.perteAction(1);
 						break;
 					case "attaquer":
+
+						if(!p.porteesuffisante(joueur1, joueur2)){
+							System.out.println(joueur2.getNom()+" n'est pas à votre portée");
+							break;
+						}
+
 						p.attaqueJoueur(joueur1, joueur2);
-                        action --;
-                        affichePlateau(p);
-                        break;
+						if (joueur2.getVie() > 0) {
+							System.out.println(joueur2.getNom() + " a maintenant " + joueur2.getVie() + " de vie.");
+						}
+						joueur1.perteAction(1);
+						break;
 
 					case "se proteger":
-
-						action--;
-                        affichePlateau(p);
+						if(joueur1.getAction()!=1){
+							System.out.println("Vous ne pouvez pas vous proteger maintenant, le joueur ne va pas attaquer avant au moins un tour");
+						} else {
+							joueur1.perteAction(1);
+						}
 						break;
 				}
+				if (joueur2.getVie() > 0) {
+					affichePlateau(p);
+				}
 			}
-			action=2;
-			while(action != 0){
-				System.out.println("Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
+
+			//tour du 2eme joueur
+
+			joueur2.setAction(2 + (joueur2.getIntelligence() / (2 * joueur1.getIntelligence())));
+
+			while ((joueur2.getAction() > 0) && (joueur1.getVie() > 0) && (joueur2.getVie() > 0)) {
+				System.out.println(joueur2.getNom() + " avez " + joueur2.getAction() + " points d'action");
+				System.out.println(joueur2.getNom() + " Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
 				switch (sc.nextLine()) {
 					case "se deplacer":
 						p.bougeJoueur(joueur2, joueur1);
-						action -= 1;
-                        affichePlateau(p);
+						joueur2.perteAction(1);
 						break;
 					case "se soigner":
-						//p.getPersonnage2().soigner(joueur2.getClasse().getBonusvie());
-
-						action -= 1;
-                        affichePlateau(p);
+						p.soignerJoueur(joueur2);
+						joueur2.perteAction(1);
 						break;
 					case "attaquer":
+
+						if(!p.porteesuffisante(joueur2, joueur1)){
+							System.out.println(joueur1.getNom()+" n'est pas à votre portée");
+							break;
+						}
 						p.attaqueJoueur(joueur2, joueur1);
-						action -= 1;
-                        affichePlateau(p);
+						if (joueur1.getVie() > 0) {
+							System.out.println(joueur1.getNom() + " a maintenant " + joueur1.getVie() + " de vie.");
+						}
+						joueur2.perteAction(1);
 						break;
 					case "se proteger":
-						action -= 1;
-                        affichePlateau(p);
+						joueur2.perteAction(1);
 						break;
 				}
+				if (joueur1.getVie() > 0) {
+					affichePlateau(p);
+				}
+
+
 			}
-			action=2;
+
+			joueur1.setAction(2 + (joueur1.getIntelligence() / (2*joueur2.getIntelligence())));
+
 		}
+
+
+
+
 		System.out.println("Le jeu est fini");
-		
+		if(joueur1.getVie()<joueur2.getVie()) {
+			System.out.println(joueur2.getNom() + " a gagné.");
+		}else{
+			System.out.println(joueur1.getNom()+" a gagné.");
+		}
+
+
 	}
 
+
 	private static void affichePlateau(Plateau p){
+
 		char [][] plateau= p.getPlateau();
 		for(int i=0; i<plateau.length; i++){
 			for(int j=0; j<plateau[i].length;j++){
 				System.out.print(plateau[i][j]);
 			}
 			System.out.println();
+
 		}
 	}
 		
@@ -101,6 +158,37 @@ class Jeu{
 		int vie=0;
 			System.out.println("Joueur "+ordre+" Entrez votre nom: ");
 			String nom= sc.nextLine();
+			System.out.println();
+			System.out.println(" Voulez-vous jouer avec ");
+			System.out.println("un Elfe(1)");
+			System.out.println("un Homme(2)");
+			System.out.println("un Nain(3)");
+			System.out.println("un Orc(4)");
+
+			switch(sc.nextInt()){
+				case 1:
+					race = new Elfe();
+					break;
+
+				case 2:
+					race = new Homme();
+					break;
+
+				case 3:
+					race = new Nain();
+					break;
+
+				case 4:
+					race = new Orc();
+					break;
+
+				default:
+					race = null;
+
+			}
+			System.out.println(nom+" combat avec un "+race.getNom());
+			System.out.println();
+
 			System.out.println(" Choississez une classe");
 			System.out.println("Paladins(1)");
 			System.out.println("Guerriers(2)");
@@ -129,38 +217,7 @@ class Jeu{
 
 			}
 			System.out.println(nom+" combat avec un "+classe.getNom());
-
-
-			System.out.println(" Voulez-vous jouer avec ");
-			System.out.println("un Elfe(1)");
-		    System.out.println("un Homme(2)");
-		    System.out.println("un Nain(3)");
-		    System.out.println("un Orque(4)");
-
-		switch(sc.nextInt()){
-			case 1:
-				race = new Elfe();
-				break;
-
-			case 2:
-				race = new Homme();
-				break;
-
-			case 3:
-				race = new Nain();
-				break;
-
-			case 4:
-				race = new Orque();
-				break;
-
-			default:
-				race = null;
-
-		}
-		System.out.println(nom+" combat avec un "+race.getNom());
-
-
+			System.out.println();
 			System.out.println("Vous avez 24 points à repartir dans les attributs max 10");
 			do{
 				System.out.println("Il vous reste: "+point+". Combien de point en force? ");

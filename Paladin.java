@@ -1,7 +1,7 @@
 public class Paladin extends Classe {
     public Paladin(){
         this.nom = NOM_1;
-        this.attaqueEpee = true;
+        this.arme = "son épée";
         this.attaque = 10;
 
     }
