@@ -6,6 +6,7 @@ public class Archer extends Classe {
         this.arme = "son arc";
         this.attaque = 10;
 
+
     }
 
 }

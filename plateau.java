@@ -57,13 +57,10 @@ class Plateau{
 	}
 
 	public void attaqueJoueur(Personnages joueurquiattaque, Personnages joueurquisedefend) {
-		boolean attaqueReussie;
-		// definir un booleen porteeSuffisante et ne pas oublier de l'inclure ds la fonction personnage.attaquer
-		//porteesuffisante(joueurquiattaque.getClasse().getNom(), joueurquiattaque.getX(), joueurquiattaque.getY(), joueurquisedefend.getX(), joueurquisedefend.getY());
 
+		boolean attaqueNonEchouee = ((Math.random() - ((Math.pow(joueurquiattaque.getDexterite(), 1/3)-Math.pow(joueurquisedefend.getDexterite(), 1/3)) / Math.pow((0.8*joueurquiattaque.getDexterite()) + joueurquisedefend.getDexterite(), 1/2))) > 0.5);
+		boolean attaqueReussie = ((porteesuffisante(joueurquiattaque, joueurquisedefend)) && (attaqueNonEchouee));
 
-
-		attaqueReussie = ((Math.random() - ((Math.pow(joueurquiattaque.getDexterite(), 1/3)-Math.pow(joueurquisedefend.getDexterite(), 1/3)) / Math.pow((0.8*joueurquiattaque.getDexterite()) + joueurquisedefend.getDexterite(), 1/2))) > 0.5);
 
 
 		joueurquisedefend.perteVie(joueurquiattaque.attaquer(attaqueReussie));
@@ -83,20 +80,36 @@ class Plateau{
 		}
 	}
 
-	/*
-	public boolean porteesuffisante(String nomClasse, int x1, int y1, int x2, int y2){
 
-		switch(nomClasse){
+	public boolean porteesuffisante(Personnages attaquant, Personnages defenseur){
+
+		switch(attaquant.getClasse().getNom()){
 			case "Archer":
-				if x1
+				return attaquant.porteeArcher(attaquant.getX(),attaquant.getY(),defenseur.getX(), defenseur.getY());
 
+
+			case "Paladin":
+				return attaquant.porteePaladin(attaquant.getX(),attaquant.getY(),defenseur.getX(), defenseur.getY());
+
+
+			case "Guerrier":
+				return attaquant.porteeGuerrier(attaquant.getX(),attaquant.getY(),defenseur.getX(), defenseur.getY());
+
+
+			case "Magicien":
+				return attaquant.porteeMagicien(attaquant.getX(),attaquant.getY(),defenseur.getX(), defenseur.getY());
+
+
+			default:
+				return false;
 		}
+
 
 
 
 	}
 
-	 */
+
 	public char[][] getPlateau(){
 		return this.monde;
 	}
