@@ -1,5 +1,5 @@
-public class Orque extends Race {
-    public Orque(){
+public class Orc extends Race {
+    public Orc(){
         this.nom = NOM_4;
         this.bonusdexterite = 0;
         this.bonusforce = 15;

@@ -137,6 +137,37 @@ class Jeu{
 		int vie=0;
 			System.out.println("Joueur "+ordre+" Entrez votre nom: ");
 			String nom= sc.nextLine();
+			System.out.println();
+			System.out.println(" Voulez-vous jouer avec ");
+			System.out.println("un Elfe(1)");
+			System.out.println("un Homme(2)");
+			System.out.println("un Nain(3)");
+			System.out.println("un Orc(4)");
+
+			switch(sc.nextInt()){
+				case 1:
+					race = new Elfe();
+					break;
+
+				case 2:
+					race = new Homme();
+					break;
+
+				case 3:
+					race = new Nain();
+					break;
+
+				case 4:
+					race = new Orc();
+					break;
+
+				default:
+					race = null;
+
+			}
+			System.out.println(nom+" combat avec un "+race.getNom());
+			System.out.println();
+
 			System.out.println(" Choississez une classe");
 			System.out.println("Paladins(1)");
 			System.out.println("Guerriers(2)");
@@ -165,38 +196,7 @@ class Jeu{
 
 			}
 			System.out.println(nom+" combat avec un "+classe.getNom());
-
-
-			System.out.println(" Voulez-vous jouer avec ");
-			System.out.println("un Elfe(1)");
-		    System.out.println("un Homme(2)");
-		    System.out.println("un Nain(3)");
-		    System.out.println("un Orque(4)");
-
-		switch(sc.nextInt()){
-			case 1:
-				race = new Elfe();
-				break;
-
-			case 2:
-				race = new Homme();
-				break;
-
-			case 3:
-				race = new Nain();
-				break;
-
-			case 4:
-				race = new Orque();
-				break;
-
-			default:
-				race = null;
-
-		}
-		System.out.println(nom+" combat avec un "+race.getNom());
-
-
+			System.out.println();
 			System.out.println("Vous avez 24 points à repartir dans les attributs max 10");
 			do{
 				System.out.println("Il vous reste: "+point+". Combien de point en force? ");
