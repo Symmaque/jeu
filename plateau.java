@@ -25,17 +25,7 @@ class Plateau{
 		
 		this.j1= joueur1;
 		this.j2= joueur2;
-		
-		this.monde[2][2]=(char) (j1.getVie()/10);
-		this.monde[2][3]=(char) (j1.getVie()%10);
-		this.monde[2][5]='/';
-		this.monde[2][6]=(char) (j1.getViemax()/10);
-		this.monde[2][7]=(char) (j1.getViemax()%10);
-		this.monde[2][12]=(char) (j2.getVie()/10);
-		this.monde[2][13]=(char) (j2.getVie()%10);
-		this.monde[2][14]='/';
-		this.monde[2][15]=(char) (j2.getViemax()/10);
-		this.monde[2][16]=(char) (j2.getViemax()%10);
+
 	}
 	
 	public void bougeJoueur(Personnages joueurquibouge, Personnages joueurfixe){

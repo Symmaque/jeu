@@ -92,7 +92,7 @@ class Personnages{
 	public void soigner(int heal){
 		int difference=this.viemax-this.vie;
 		if(difference>0){
-			if(heal>=difference){
+			if(heal>=difference && this.getIntelligence()>= (int)(Math.random()*60)){
 				this.vie+= difference;
 			} else{
 				this.vie+= heal;

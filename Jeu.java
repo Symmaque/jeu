@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 class Jeu{
 	public static void main (String [] arg) {
 		Scanner sc = new Scanner(System.in);
@@ -24,7 +25,12 @@ class Jeu{
 		if (joueur1.getIntelligence() < joueur2.getIntelligence()) {
 			joueur1.setAction(0);                                                                         //le plus intelligent commence
 		} else {
-			joueur1.setAction(2 + (joueur1.getIntelligence() / (2 * joueur2.getIntelligence())));
+			if (2 + (joueur1.getIntelligence() / (2 * joueur2.getIntelligence()))<=5){
+				joueur1.setAction(2 + (joueur1.getIntelligence() / (2 * joueur2.getIntelligence())));
+			} else{
+				joueur1.setAction(4);
+			}
+
 		}
 
 
