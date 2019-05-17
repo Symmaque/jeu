@@ -43,20 +43,20 @@ class Plateau{
 		System.out.println("Ou voulez vous aller, haut (0), bas (1), droite (2), gauche (3), rester (4) ? ");
 		int a= sc.nextInt();
 		boolean mvtpossible= true;
-		if(a==0){
-				if(joueurquibouge.getX()-1==joueurfixe.getX()){
+		if(a==0){  //haut
+				if(this.monde[joueurquibouge.getX()-1][joueurquibouge.getY()]==this.monde[joueurfixe.getX()][joueurfixe.getY()]){
 					mvtpossible=false;
 				}
-			} else if(a==1){
-				if(joueurquibouge.getX()+1==joueurfixe.getX()){
+			} else if(a==1){   //bas
+				if(this.monde[joueurquibouge.getX()+1][joueurquibouge.getY()]==this.monde[joueurfixe.getX()][joueurfixe.getY()]){
 					mvtpossible=false;
 				}
 			} else if(a==2){
-				if(joueurquibouge.getY()-1==joueurfixe.getY()){
+				if(this.monde[joueurquibouge.getX()][joueurquibouge.getY()-1]==this.monde[joueurfixe.getX()][joueurfixe.getY()]){
 					mvtpossible=false;
 				}
 			} else if(a==3){
-				if(joueurquibouge.getY()+1==joueurfixe.getY()){
+				if(this.monde[joueurquibouge.getX()][joueurquibouge.getY()+1]==this.monde[joueurfixe.getX()][joueurfixe.getY()]){
 					mvtpossible=false;
 				}
 			}
