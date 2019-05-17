@@ -122,26 +122,26 @@ class Personnages{
 	}
 
 	public boolean porteeArcher(int x1, int y1, int x2, int y2){
-		int diffX = Math.abs(x1-x2);
-		int diffY = Math.abs(y1-y2);
-		return (((4<diffX)&&(diffX<10))&&((4<diffY)&&(diffY<10)));
+		int diffX = Math.abs((x1-x2));
+		int diffY = Math.abs((y1-y2));
+		return (((4<diffX)&&(diffX<10))||((4<diffY)&&(diffY<10)));
 	}
 
 	public boolean porteePaladin(int x1, int y1, int x2, int y2){
-		int diffX = Math.abs(x1-x2);
-		int diffY = Math.abs(y1-y2);
+		int diffX = Math.abs((x1-x2));
+		int diffY = Math.abs((y1-y2));
 		return (((diffX<6)&&(diffY == 0))||((diffY<6)&&(diffX == 0)));
 	}
 
 	public boolean porteeGuerrier(int x1, int y1, int x2, int y2){
-		int diffX = Math.abs(x1-x2);
-		int diffY = Math.abs(y1-y2);
+		int diffX = Math.abs((x1-x2));
+		int diffY = Math.abs((y1-y2));
 		return ((diffX<5)&&(diffY<5));
 	}
 
 	public boolean porteeMagicien(int x1, int y1, int x2, int y2){
-		int diffX = Math.abs(x1-x2);
-		int diffY = Math.abs(y1-y2);
+		int diffX = Math.abs((x1-x2));
+		int diffY = Math.abs((y1-y2));
 		return (((diffX<7)&&(diffY<7))&&((diffX != 0)||(diffY != 0)));
 	}
 

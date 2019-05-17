@@ -3,9 +3,8 @@ class Plateau{
 	private char [][] monde;
 	private Personnages j1;
 	private Personnages j2;
-	private int nbrrocher; 
 	
-	public Plateau(Personnages joueur1, Personnages joueur2, int rocher){
+	public Plateau(Personnages joueur1, Personnages joueur2){
 		this.monde= new char[20][20];
 		for(int i=0; i<20; i++){
 			for(int j=0; j<20;j++){
@@ -19,10 +18,7 @@ class Plateau{
 		}
 		this.monde[joueur1.getX()][joueur1.getY()]='1';
 		this.monde[joueur2.getX()][joueur2.getY()]='2';
-		for(int i=0; i<rocher;i++){
-			this.monde[5+((int)Math.random()*9)][5+((int)Math.random()*9)]='O';
-		}                                                                              //beug à corriger.
-		
+
 		this.j1= joueur1;
 		this.j2= joueur2;
 
@@ -56,14 +52,14 @@ class Plateau{
 		miseajourPlateau(joueurquibouge, joueurfixe);
 	}
 
-	public void attaqueJoueur(Personnages joueurquiattaque, Personnages joueurquisedefend) {
+	public void attaqueJoueur(Personnages attaquant, Personnages defenseur) {
 
-		boolean attaqueNonEsquivee = ((Math.random() - ((Math.pow(joueurquiattaque.getDexterite(), 1/3)-Math.pow(joueurquisedefend.getDexterite(), 1/3)) / Math.pow((0.8*joueurquiattaque.getDexterite()) + joueurquisedefend.getDexterite(), 1/2))) > 0.5);
-		boolean attaqueReussie = ((porteesuffisante(joueurquiattaque, joueurquisedefend)) && (attaqueNonEsquivee));
+		boolean attaqueNonEsquivee = ((Math.random() - ((Math.pow(attaquant.getDexterite(), 1/3)-Math.pow(defenseur.getDexterite(), 1/3)) / Math.pow((0.8*attaquant.getDexterite()) + defenseur.getDexterite(), 1/2))) > 0.65);
+		boolean attaqueReussie = ((porteesuffisante(attaquant, defenseur)) && (attaqueNonEsquivee));
 
 
 
-		joueurquisedefend.perteVie(joueurquiattaque.attaquer(attaqueReussie));
+		defenseur.perteVie(attaquant.attaquer(attaqueReussie));
 
 	}
 
@@ -104,13 +100,73 @@ class Plateau{
 				return false;
 		}
 
+	}
 
+	public void affichePortee(Personnages attaquant){
+		switch(attaquant.getClasse().getNom()){
+			case "Archer":
+				for(int i=5; i<15; i++) {
+					for (int j = 5; j < 15; j++) {
+						if (attaquant.porteeArcher(attaquant.getX(),attaquant.getY(),i,j)) {
+							this.monde[i][j] = '+';
+						}
 
+					}
+				}
+				break;
+
+			case"Paladin":
+				for(int i=5; i<15; i++) {
+					for (int j = 5; j < 15; j++) {
+						if (attaquant.porteePaladin(attaquant.getX(),attaquant.getY(),i,j)) {
+							this.monde[i][j] = '+';
+						}
+
+					}
+				}
+				break;
+
+			case "Guerrier":
+				for(int i=5; i<15; i++) {
+					for (int j = 5; j < 15; j++) {
+						if (attaquant.porteeGuerrier(attaquant.getX(),attaquant.getY(),i,j)) {
+							this.monde[i][j] = '+';
+						}
+
+					}
+
+				}
+
+				break;
+
+			case "Magicien":
+				for(int i=5; i<15; i++) {
+					for (int j = 5; j < 15; j++) {
+						if (attaquant.porteeMagicien(attaquant.getX(),attaquant.getY(),i,j)) {
+							this.monde[i][j] = '+';
+						}
+
+					}
+				}
+				break;
+
+		}
+	}
+
+	public void desaffichePortee(Personnages joueur1, Personnages joueur2){
+		for(int i=5; i<15; i++){
+			for(int j=5; j<15;j++){
+				this.monde[i][j]=' ';
+			}
+		}
+		this.monde[joueur1.getX()][joueur1.getY()]='1';
+		this.monde[joueur2.getX()][joueur2.getY()]='2';
 
 	}
 
 
 	public char[][] getPlateau(){
+
 		return this.monde;
 	}
 	

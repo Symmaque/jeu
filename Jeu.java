@@ -3,11 +3,8 @@ import java.util.Scanner;
 class Jeu{
 	public static void main (String [] arg) {
 		Scanner sc = new Scanner(System.in);
-		int action;
 
 
-		/*Personnages test= new Personnages("moi", "homme", "guerrier", "epee", 10, 1, 2, 4);
-		System.out.println(test);*/
 		//ajouter info création de personnage
 		Personnages joueur1 = Creationpers(1, 9, 5);
 		System.out.println(joueur1);
@@ -15,7 +12,7 @@ class Jeu{
 		Personnages joueur2 = Creationpers(2, 10, 14);
 		System.out.println(joueur2);
 		System.out.println();
-		Plateau p = new Plateau(joueur1, joueur2, 10);
+		Plateau p = new Plateau(joueur1, joueur2);
 		affichePlateau(p);
 
 
@@ -35,11 +32,11 @@ class Jeu{
 
 
 
-		while (joueur1.getVie() > 0 && joueur2.getVie() > 0) {     //tant que les joueurs sont vivants
+		while(joueursVivants(joueur1,joueur2))  {     //tant que les joueurs sont vivants
 
 			//tour du joueur 1
 
-			while ((joueur1.getAction() > 0) && (joueur1.getVie() > 0) && (joueur2.getVie() > 0)) {
+			while ((joueur1.getAction() > 0) && joueursVivants(joueur1,joueur2)) {
 				System.out.println(joueur1.getNom() + " avez " + joueur1.getAction() + " points d'action");
 				System.out.println(joueur1.getNom() + " Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
 				switch (sc.nextLine()) {
@@ -55,6 +52,9 @@ class Jeu{
 
 						if(!p.porteesuffisante(joueur1, joueur2)){
 							System.out.println(joueur2.getNom()+" n'est pas à votre portée");
+							p.affichePortee(joueur1);
+							affichePlateau(p);
+							p.desaffichePortee(joueur1,joueur2);
 							break;
 						}
 
@@ -73,6 +73,7 @@ class Jeu{
 						}
 						break;
 				}
+				p.miseajourPlateau(joueur1,joueur2);
 				if (joueur2.getVie() > 0) {
 					affichePlateau(p);
 				}
@@ -82,7 +83,7 @@ class Jeu{
 
 			joueur2.setAction(2 + (joueur2.getIntelligence() / (2 * joueur1.getIntelligence())));
 
-			while ((joueur2.getAction() > 0) && (joueur1.getVie() > 0) && (joueur2.getVie() > 0)) {
+			while ((joueur2.getAction() > 0) && joueursVivants(joueur1,joueur2)) {
 				System.out.println(joueur2.getNom() + " avez " + joueur2.getAction() + " points d'action");
 				System.out.println(joueur2.getNom() + " Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
 				switch (sc.nextLine()) {
@@ -98,7 +99,11 @@ class Jeu{
 
 						if(!p.porteesuffisante(joueur2, joueur1)){
 							System.out.println(joueur1.getNom()+" n'est pas à votre portée");
+							p.affichePortee(joueur2);
+							affichePlateau(p);
+							p.desaffichePortee(joueur1, joueur2);
 							break;
+
 						}
 						p.attaqueJoueur(joueur2, joueur1);
 						if (joueur1.getVie() > 0) {
@@ -110,7 +115,9 @@ class Jeu{
 						joueur2.perteAction(1);
 						break;
 				}
+
 				if (joueur1.getVie() > 0) {
+
 					affichePlateau(p);
 				}
 
@@ -248,5 +255,9 @@ class Jeu{
 			return new Personnages(nom, race, classe, force, dexterite, vie, intelligence, x, y);
 			
 		
+	}
+
+	private static boolean joueursVivants(Personnages joueur1, Personnages joueur2){
+		return (joueur1.getVie() > 0 && joueur2.getVie() > 0);
 	}
 }
