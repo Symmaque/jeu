@@ -52,6 +52,12 @@ class Jeu{
 						joueur1.perteAction(1);
 						break;
 					case "attaquer":
+
+						if(!p.porteesuffisante(joueur1, joueur2)){
+							System.out.println(joueur2.getNom()+" n'est pas à votre portée");
+							break;
+						}
+
 						p.attaqueJoueur(joueur1, joueur2);
 						if (joueur2.getVie() > 0) {
 							System.out.println(joueur2.getNom() + " a maintenant " + joueur2.getVie() + " de vie.");
@@ -85,6 +91,11 @@ class Jeu{
 						joueur2.perteAction(1);
 						break;
 					case "attaquer":
+
+						if(!p.porteesuffisante(joueur2, joueur1)){
+							System.out.println(joueur1.getNom()+" n'est pas à votre portée");
+							break;
+						}
 						p.attaqueJoueur(joueur2, joueur1);
 						if (joueur1.getVie() > 0) {
 							System.out.println(joueur1.getNom() + " a maintenant " + joueur1.getVie() + " de vie.");
