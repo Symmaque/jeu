@@ -58,8 +58,8 @@ class Plateau{
 
 	public void attaqueJoueur(Personnages joueurquiattaque, Personnages joueurquisedefend) {
 
-		boolean attaqueNonEchouee = ((Math.random() - ((Math.pow(joueurquiattaque.getDexterite(), 1/3)-Math.pow(joueurquisedefend.getDexterite(), 1/3)) / Math.pow((0.8*joueurquiattaque.getDexterite()) + joueurquisedefend.getDexterite(), 1/2))) > 0.5);
-		boolean attaqueReussie = ((porteesuffisante(joueurquiattaque, joueurquisedefend)) && (attaqueNonEchouee));
+		boolean attaqueNonEsquivee = ((Math.random() - ((Math.pow(joueurquiattaque.getDexterite(), 1/3)-Math.pow(joueurquisedefend.getDexterite(), 1/3)) / Math.pow((0.8*joueurquiattaque.getDexterite()) + joueurquisedefend.getDexterite(), 1/2))) > 0.5);
+		boolean attaqueReussie = ((porteesuffisante(joueurquiattaque, joueurquisedefend)) && (attaqueNonEsquivee));
 
 
 

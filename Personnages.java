@@ -117,7 +117,7 @@ class Personnages{
 			System.out.println(this.getNom() + " attaque avec " + this.getClasse().getArme());
 			return this.attaque + this.getForce();
 		}
-		System.out.println("L'attaque a échoué");
+		System.out.println("L'attaque a été esquivée");
 		return 0;
 	}
 
