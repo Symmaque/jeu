@@ -155,6 +155,11 @@ class Jeu{
 	}
 		
 	private static Personnages Creationpers(int ordre, int x, int y){
+		//fenetre fen1 = new fenetre(ordre);
+		//fen1.setTitle("Perso "+ordre);
+
+
+		//fen1.setVisible(true);
 		Scanner sc= new Scanner(System.in);
 		Race race;
 		Classe classe;
