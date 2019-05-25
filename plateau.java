@@ -64,7 +64,7 @@ class Plateau{
 	}
 
 	public void soignerJoueur(Personnages joueur){
-		joueur.soigner(joueur.getRace().getBonusvie()+10);
+		joueur.soigner((int)(Math.random()*joueur.getRace().getBonusvie())+5);
 		System.out.println(joueur.getNom() + " a maintenant " + joueur.getVie() + " de vie.");
 	}
 	

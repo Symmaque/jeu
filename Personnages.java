@@ -91,12 +91,15 @@ class Personnages{
 	
 	public void soigner(int heal){
 		int difference=this.viemax-this.vie;
-		if(difference>0){
-			if(heal>=difference && this.getIntelligence()>= (int)(Math.random()*60)){
+		int a=(int)(Math.random()*40);
+		if(difference>0 && this.getIntelligence()>=a){
+			if(heal>=difference ){
 				this.vie+= difference;
 			} else{
 				this.vie+= heal;
 			}
+		}else{
+			System.out.println(this.getNom()+" a renversé sa potion et ne récupère donc pas de vie");
 		}
 	}
 
