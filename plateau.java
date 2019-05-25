@@ -52,15 +52,15 @@ class Plateau{
 		miseajourPlateau(joueurquibouge, joueurfixe);
 	}
 
-	public void attaqueJoueur(Personnages attaquant, Personnages defenseur) {
+	public void attaqueJoueur(Personnages attaquant, Personnages defenseur,int protection, int contre) {
 
 		boolean attaqueNonEsquivee = ((Math.random() - ((Math.pow(attaquant.getDexterite(), 1/3)-Math.pow(defenseur.getDexterite(), 1/3)) / Math.pow((0.8*attaquant.getDexterite()) + defenseur.getDexterite(), 1/2))) > 0.65);
 		boolean attaqueReussie = ((porteesuffisante(attaquant, defenseur)) && (attaqueNonEsquivee));
 
 
 
-		defenseur.perteVie(attaquant.attaquer(attaqueReussie));
-
+		defenseur.perteVie(attaquant.attaquer(attaqueReussie), protection);
+		attaquant.perteVie(contre, 0);
 	}
 
 	public void soignerJoueur(Personnages joueur){

@@ -31,7 +31,8 @@ class Jeu{
 		}
 
 
-
+		int a=0;  //pourcentage de protection
+		int b=0;  //dégat de la contre attaque
 		while(joueursVivants(joueur1,joueur2))  {     //tant que les joueurs sont vivants
 
 			//tour du joueur 1
@@ -58,7 +59,9 @@ class Jeu{
 							break;
 						}
 
-						p.attaqueJoueur(joueur1, joueur2);
+						p.attaqueJoueur(joueur1, joueur2, a, b);
+						a=0;
+						b=0;
 						if (joueur2.getVie() > 0) {
 							System.out.println(joueur2.getNom() + " a maintenant " + joueur2.getVie() + " de vie.");
 						}
@@ -69,6 +72,9 @@ class Jeu{
 						if(joueur1.getAction()!=1){
 							System.out.println("Vous ne pouvez pas vous proteger maintenant, le joueur ne va pas attaquer avant au moins un tour");
 						} else {
+							a=joueur1.seproteger();
+							System.out.println("Vous vous protégerez de "+a+"% des dégats de la prochaine attaque");
+							b=joueur1.contreAttaque(a);
 							joueur1.perteAction(1);
 						}
 						break;
@@ -105,14 +111,23 @@ class Jeu{
 							break;
 
 						}
-						p.attaqueJoueur(joueur2, joueur1);
+						p.attaqueJoueur(joueur2, joueur1, a, b);
+						a=0;
+						b=0;
 						if (joueur1.getVie() > 0) {
 							System.out.println(joueur1.getNom() + " a maintenant " + joueur1.getVie() + " de vie.");
 						}
 						joueur2.perteAction(1);
 						break;
 					case 4:
-						joueur2.perteAction(1);
+						if(joueur2.getAction()!=1){
+							System.out.println("Vous ne pouvez pas vous proteger maintenant, le joueur ne va pas attaquer avant au moins un tour");
+						} else {
+							a=joueur2.seproteger();
+							System.out.println("Vous vous protégerez de "+a+"% des dégats de la prochaine attaque");
+							b=joueur2.contreAttaque(a);
+							joueur2.perteAction(1);
+						}
 						break;
 				}
 

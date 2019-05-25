@@ -85,8 +85,8 @@ class Personnages{
 	    return this.nom;
     }
 	
-	public void perteVie(int degats){
-		this.vie= this.vie - degats;
+	public void perteVie(int degats, int protection){
+		this.vie= this.vie - (degats - degats*(protection/100));
 	}
 	
 	public void soigner(int heal){
@@ -145,7 +145,26 @@ class Personnages{
 		return (((diffX<7)&&(diffY<7))&&((diffX != 0)||(diffY != 0)));
 	}
 
-
+	public int seproteger(){
+		int a= (int)(this.getIntelligence()+this.getDexterite())/2;
+		int b= (int) a/3;
+		int c= (int) (Math.random()*a);
+		if(c<=b){
+			a=b;
+		} else {
+			a = c;
+		}
+		return a;
+	}
+	public int contreAttaque(int a){
+		int contre=a%4;
+		int b=this.getDexterite();
+		int c=(int)(Math.random()*b*1.5);
+			if(c>b){
+				contre=0;
+			}
+		return contre;
+	}
 
 
 
