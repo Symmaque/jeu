@@ -60,7 +60,11 @@ class Plateau{
 
 
 		defenseur.perteVie(attaquant.attaquer(attaqueReussie), protection);
-		attaquant.perteVie(contre, 0);
+		if(contre!=0) {
+			System.out.println(defenseur.getNom() + " a contre-attaqué.");
+			attaquant.perteVie(contre, 0);
+			System.out.println(attaquant.getNom() + " a maintenant " + attaquant.getVie() + " de vie.");
+		}
 	}
 
 	public void soignerJoueur(Personnages joueur){
