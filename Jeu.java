@@ -38,17 +38,17 @@ class Jeu{
 
 			while ((joueur1.getAction() > 0) && joueursVivants(joueur1,joueur2)) {
 				System.out.println(joueur1.getNom() + " avez " + joueur1.getAction() + " points d'action");
-				System.out.println(joueur1.getNom() + " Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
-				switch (sc.nextLine()) {
-					case "se deplacer":
+				System.out.println(joueur1.getNom() + " Que voulez vous faire ? se deplacer (1), se soigner (2), attaquer (3), se proteger (4) ? ");
+				switch (sc.nextInt()) {
+					case 1:
 						p.bougeJoueur(joueur1, joueur2);
 						joueur1.perteAction(1);
 						break;
-					case "se soigner":
+					case 2:
 						p.soignerJoueur(joueur1);
 						joueur1.perteAction(1);
 						break;
-					case "attaquer":
+					case 3:
 
 						if(!p.porteesuffisante(joueur1, joueur2)){
 							System.out.println(joueur2.getNom()+" n'est pas à votre portée");
@@ -65,7 +65,7 @@ class Jeu{
 						joueur1.perteAction(1);
 						break;
 
-					case "se proteger":
+					case 4:
 						if(joueur1.getAction()!=1){
 							System.out.println("Vous ne pouvez pas vous proteger maintenant, le joueur ne va pas attaquer avant au moins un tour");
 						} else {
@@ -85,17 +85,17 @@ class Jeu{
 
 			while ((joueur2.getAction() > 0) && joueursVivants(joueur1,joueur2)) {
 				System.out.println(joueur2.getNom() + " avez " + joueur2.getAction() + " points d'action");
-				System.out.println(joueur2.getNom() + " Que voulez vous faire ? se deplacer, se soigner, attaquer, se proteger ? ");
-				switch (sc.nextLine()) {
-					case "se deplacer":
+				System.out.println(joueur2.getNom() + " Que voulez vous faire ? se deplacer (1), se soigner (2), attaquer (3), se proteger (4)? ");
+				switch (sc.nextInt()) {
+					case 1:
 						p.bougeJoueur(joueur2, joueur1);
 						joueur2.perteAction(1);
 						break;
-					case "se soigner":
+					case 2:
 						p.soignerJoueur(joueur2);
 						joueur2.perteAction(1);
 						break;
-					case "attaquer":
+					case 3:
 
 						if(!p.porteesuffisante(joueur2, joueur1)){
 							System.out.println(joueur1.getNom()+" n'est pas à votre portée");
@@ -111,7 +111,7 @@ class Jeu{
 						}
 						joueur2.perteAction(1);
 						break;
-					case "se proteger":
+					case 4:
 						joueur2.perteAction(1);
 						break;
 				}
