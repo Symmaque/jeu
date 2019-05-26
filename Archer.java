@@ -1,4 +1,4 @@
-public class Archer extends Classe {
+class Archer extends Classe {
 
     public Archer(){
 

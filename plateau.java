@@ -1,8 +1,8 @@
 import java.util.Scanner;
 class Plateau{
-	private char [][] monde;
-	private Personnages j1;
-	private Personnages j2;
+	private final char [][] monde;
+	private final Personnages j1;
+	private final Personnages j2;
 	
 	public Plateau(Personnages joueur1, Personnages joueur2){
 		this.monde= new char[20][20];
@@ -49,7 +49,7 @@ class Plateau{
 		this.monde[joueurquibouge.getX()][joueurquibouge.getY()]=' ';
 		
 		joueurquibouge.bouge(mvtpossible, a);
-		miseajourPlateau(joueurquibouge, joueurfixe);
+		miseajourPlateau(joueurquibouge);
 	}
 
 	public void attaqueJoueur(Personnages attaquant, Personnages defenseur,int protection, int contre) {
@@ -72,7 +72,7 @@ class Plateau{
 		System.out.println(joueur.getNom() + " a maintenant " + joueur.getVie() + " de vie.");
 	}
 	
-	public void miseajourPlateau(Personnages joueurquibouge, Personnages joueurfixe){
+	public void miseajourPlateau(Personnages joueurquibouge){
 		if (this.j1.equals(joueurquibouge)){
 			this.monde[joueurquibouge.getX()][joueurquibouge.getY()]='1';
 		} else{
@@ -173,12 +173,5 @@ class Plateau{
 
 		return this.monde;
 	}
-	
-	public Personnages getPersonnage1(){
-		return this.j1;
-	}
-	
-	public Personnages getPersonnage2(){
-		return this.j2;
-	}
+
 }

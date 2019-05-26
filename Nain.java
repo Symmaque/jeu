@@ -1,4 +1,4 @@
-public class Nain extends Race {
+class Nain extends Race {
     public Nain(){
         this.nom = NOM_3;
         this.bonusdexterite = 20;

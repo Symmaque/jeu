@@ -1,18 +1,17 @@
 abstract class Classe {
-	protected String nom;
-	protected int attaque;
-	protected String arme;
-	protected String NOM_1 = "Paladin";
-	protected String NOM_2 = "Guerrier";
-	protected String NOM_3 = "Archer";
-	protected String NOM_4 = "Magicien";
-	protected boolean [][] portee;
+	String nom;
+	int attaque;
+	String arme;
+	final String NOM_1 = "Paladin";
+	final String NOM_2 = "Guerrier";
+	final String NOM_3 = "Archer";
+	final String NOM_4 = "Magicien";
 
-	public Classe() {
+
+	Classe() {
 		this.nom = null;
 		this.arme = null;
 		this.attaque = 0;
-		this.portee = null;
 
 	}
 

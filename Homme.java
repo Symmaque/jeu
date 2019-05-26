@@ -1,4 +1,4 @@
-public class Homme extends Race{
+class Homme extends Race{
     public Homme(){
         this.nom = NOM_2;
         this.bonusdexterite = 30;

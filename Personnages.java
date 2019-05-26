@@ -1,15 +1,15 @@
 class Personnages{
-	private String nom;
-	private Race race;
-	private Classe classe;
-	private int force;
-	private int dexterite; 
+	private final String nom;
+	private final Race race;
+	private final Classe classe;
+	private final int force;
+	private final int dexterite;
 	private int vie; 
-	private int viemax;
-	private int intelligence;
+	private final int viemax;
+	private final int intelligence;
 	private int x;
 	private int y;
-	private int attaque;
+	private final int attaque;
 	private int action;
 	
 	public Personnages(String nom, Race race,Classe classe, int force, int dexterite, int vie, int intelligence, int x, int y){
@@ -50,15 +50,13 @@ class Personnages{
 	public int getVie(){
 		return this.vie;
 	}
-	public int getViemax(){
-		return viemax;
-	}
+
 
 	public int getDexterite() {
 		return dexterite;
 	}
 
-	public int getForce() {
+	private int getForce() {
 		return force;
 	}
 
@@ -149,8 +147,8 @@ class Personnages{
 	}
 
 	public int seproteger(){
-		int a= (int)(this.getIntelligence()+this.getDexterite())/2;
-		int b= (int) a/3;
+		int a= (this.getIntelligence()+this.getDexterite())/2;
+		int b=  a/3;
 		int c= (int) (Math.random()*a);
 		if(c<=b){
 			a=b;
@@ -172,8 +170,7 @@ class Personnages{
 
 
 	public String toString(){
-		String s= "Carte du personnage: Nom: "+ this.nom+ " ,Race: "+this.race.getNom()+" ,classe: "+this.classe.getNom()+" ,attribut: "+this.force+" en force, "+this.dexterite+" en dexterite, "+this.intelligence+" en intelligence, "+this.vie+" en vie.";
-		return s;
+		return "Carte du personnage: Nom: "+ this.nom+ " ,Race: "+this.race.getNom()+" ,classe: "+this.classe.getNom()+" ,attribut: "+this.force+" en force, "+this.dexterite+" en dexterite, "+this.intelligence+" en intelligence, "+this.vie+" en vie.";
 	}
 	
 }

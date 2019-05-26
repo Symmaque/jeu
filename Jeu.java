@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 class Jeu {
@@ -36,7 +37,7 @@ class Jeu {
 
 
 		int a = 0;  //pourcentage de protection
-		int b = 0;  //dégat de la contre attaque
+		int b = 0;  //dégats de la contre attaque
 		while (joueursVivants(joueur1, joueur2)) {     //tant que les joueurs sont vivants
 
 			//tour du joueur 1
@@ -74,16 +75,16 @@ class Jeu {
 
 					case 4:
 						if (joueur1.getAction() != 1) {
-							System.out.println("Vous ne pouvez pas vous proteger maintenant, le joueur ne va pas attaquer avant au moins un tour");
+							System.out.println("Vous ne pouvez pas vous proteger maintenant, "+joueur2.getNom()+"  ne vous attaquera pas avant au moins un tour");
 						} else {
 							a = joueur1.seproteger();
-							System.out.println("Vous vous protégerez de " + a + "% des dégats de la prochaine attaque");
+							System.out.println("Vous vous protègerez de " + a + "% des dégats de la prochaine attaque");
 							b = joueur1.contreAttaque(a);
 							joueur1.perteAction(1);
 						}
 						break;
 				}
-				p.miseajourPlateau(joueur1, joueur2);
+				p.miseajourPlateau(joueur1);
 				if (joueur2.getVie() > 0) {
 					affichePlateau(p);
 				}
@@ -125,18 +126,18 @@ class Jeu {
 						break;
 					case 4:
 						if (joueur2.getAction() != 1) {
-							System.out.println("Vous ne pouvez pas vous proteger maintenant, le joueur ne va pas attaquer avant au moins un tour");
+							System.out.println("Vous ne pouvez pas vous proteger maintenant, "+joueur1.getNom()+"  ne vous attaquera pas avant au moins un tour");
 						} else {
 							a = joueur2.seproteger();
-							System.out.println("Vous vous protégerez de " + a + "% des dégats de la prochaine attaque");
+							System.out.println("Vous vous protègerez de " + a + "% des dégats de la prochaine attaque");
 							b = joueur2.contreAttaque(a);
 							joueur2.perteAction(1);
 						}
 						break;
 				}
+				p.miseajourPlateau(joueur2);
 
 				if (joueur1.getVie() > 0) {
-
 					affichePlateau(p);
 				}
 
@@ -150,9 +151,9 @@ class Jeu {
 
 		System.out.println("Le jeu est fini");
 		if (joueur1.getVie() < joueur2.getVie()) {
-			System.out.println(joueur2.getNom() + " a gagné. Le plus fort est sorti vaincqueur de cette formidable confrontation.");
+			System.out.println(joueur2.getNom() + " a gagné. Le plus fort est sorti vainqueur de cette formidable confrontation.");
 		} else {
-			System.out.println(joueur1.getNom() + " a gagné. Le plus fort est sorti vaincqueur de cette formidable confrontation.");
+			System.out.println(joueur1.getNom() + " a gagné. Le plus fort est sorti vainqueur de cette formidable confrontation.");
 		}
 		System.out.println();
 		credit();
@@ -162,9 +163,9 @@ class Jeu {
 	private static void affichePlateau(Plateau p) {
 
 		char[][] plateau = p.getPlateau();
-		for (int i = 0; i < plateau.length; i++) {
-			for (int j = 0; j < plateau[i].length; j++) {
-				System.out.print(plateau[i][j]);
+		for (char[] chars : plateau) {
+			for (int j = 0; j < chars.length; j++) {
+				System.out.print(chars[j]);
 			}
 			System.out.println();
 
@@ -216,7 +217,7 @@ class Jeu {
 				race = null;
 
 		}
-		System.out.println(nom + " combat avec un " + race.getNom());
+		System.out.println(nom + " combat avec un " + Objects.requireNonNull(race).getNom());
 		System.out.println();
 		presentationClasse();
 		System.out.println(" Choississez une classe");
@@ -246,7 +247,7 @@ class Jeu {
 				classe = null;
 
 		}
-		System.out.println(nom + " combat avec un " + classe.getNom());
+		System.out.println(nom + " combat avec un " + Objects.requireNonNull(classe).getNom());
 		System.out.println();
 		System.out.println("Pour finir, vous avez 24 points à repartir dans les attributs maximum 10 points en plus par attribut. Choississez bien, votre victoire en dépend.");
 		do {
@@ -284,67 +285,67 @@ class Jeu {
 		return (joueur1.getVie() > 0 && joueur2.getVie() > 0);
 	}
 
-	public static void introduction() {
+	private static void introduction() {
 		System.out.println();
-		System.out.println("Bienvenu dans x !");
+		System.out.println("Nous vous souhaitons la bienvenue dans x !");
 		System.out.println();
 		System.out.println("Vous allez incarner un héros et vous battre à mort pour la gloire et la richesse");
 		System.out.println();
 		System.out.println("Vous devrez d'abord créer votre combattant en le personnalisant à votre guise pour le rendre le plus performant possible. ");
-		System.out.println("Puis, il saura envoyer dans une arène pour combattre le héros de votre adversaire. Le dernier debout gagne.");
+		System.out.println("Puis vous l'enverrez dans l'arène pour combattre le héros de votre adversaire. Le dernier debout gagne.");
 		System.out.println();
-		System.out.println("Il faut savoir que quatres caractéristiqus définiront votre héros, la force, la dextérité, l'intelligence et la vie. ");
-		System.out.println("Chacunes influent sur ses actions et à une importance. Il est donc important de bien les défénir avec les choix qui vous seront proposer suivant votre style de jeu.");
+		System.out.println("Il faut savoir que quatre caractéristiques définiront votre héros: la Force, la Dextérité, l'Intelligence et la Vie. ");
+		System.out.println("Chacune influe sur ses actions. Il est donc important de bien les défénir avec les choix qui vous seront proposés suivant votre style de jeu.");
 		System.out.println();
 		System.out.println("Commençons.");
 		System.out.println();
 	}
 
-	public static void presentationRace(){
-		System.out.println("Il faut choisir une race à votre personnages. Il y en a 4.");
+	private static void presentationRace(){
+		System.out.println("Il faut choisir une race pour votre personnage. Il y en a 4.");
 		System.out.println();
-		System.out.println("L'elfe est assez équilibré. Il a su acquérir une expérience importante en matière de combat grâce à sa vitalité phénoménale. ");
+		System.out.println("L'Elfe est assez équilibré. Il a su acquérir une expérience importante en matière de combat grâce à sa vitalité phénoménale. ");
 		System.out.println("Il est très rapide et son sens de la stratégie est sans égal. Il méprise les nains et se fera un plaisir de les ridiculiser.");
-		System.out.println("L'homme a su se demarqué des autres races de part son intelligence sans égal. Pour le reste, il est assez équilibré.");
-		System.out.println("Il se pense nettement supérieur aux autres races et c'est peu être son plus grand point faible.");
-		System.out.println("Le nain, il frappe d'abord et pense après. Un nain est peu malin et préferera toujours une bonne bière au combat. ");
-		System.out.println("Néanmoins, ce n'est pas pour rien que les dragons le redoute tant. Son rêve, dominer les elfes.");
-		System.out.println("Enfin, l'orc haïe de toutes les autres races. Cet être est incapable de faire la différence entre ses amis et ses ennemis. ");
-		System.out.println("Il ne pense qu'à se battre et ne craint aucune douleure. Il est si puissant qu'il ne cherche ni à réfléchir ni à esquiver les coups.");
+		System.out.println("L'Homme a su se demarquer des autres races par son intelligence sans égale. Pour le reste, il est assez équilibré.");
+		System.out.println("Il se pense nettement supérieur aux autres races et c'est peut-être son seul point faible.");
+		System.out.println("Le Nain frappe d'abord et pense après. Un nain est peu malin et préferera toujours une bonne bière au combat. ");
+		System.out.println("Néanmoins, ce n'est pas pour rien que les dragons le redoutent tant. Son rêve, dominer les Elfes.");
+		System.out.println("Enfin, l'Orc est haï par toutes les autres races. Cet être est incapable de faire la différence entre ses amis et ses ennemis. ");
+		System.out.println("Il ne pense qu'à se battre et ne craint aucune douleur. Il est si puissant qu'il ne cherche ni à réfléchir ni à esquiver les coups.");
 		System.out.println();
 	}
 
-	public static void presentationClasse(){
+	private static void presentationClasse(){
 		System.out.println("Il vous faut maintenant chosir une classe. Il y en a aussi 4.");
 		System.out.println();
-		System.out.println("Il y a le paladin. Un être caractérisé par son honneur et sa vertu. Il se bas pour le bien et pour le préserver. ");
-		System.out.println("Adapte d'un combat rapprocher, il maitrise son épée à la perfection.");
-		System.out.println("Le guerrier est né guerrier et mourrera guerrier. Avec sa lance, il enchaîne les batailles pour amasser toujours plus de ");
-		System.out.println("récompenses et de gloires et ainsi devenir la vedette de la taverne.");
-		System.out.println("L'archer possède une agilité sans égal qui lui pourrait de rester en sécurité loin de sa cible qu'il peut ensuite facilement ");
-		System.out.println("abattre d'une flèche avec son arc. On dit qu'il pourrait toucher une pomme à 100m de distances.");
-		System.out.println("Le magicien maitrise les éléments à la perfection. ");
-		System.out.println("Il prend donc un malin plaisir à jeter des boules de feu sur ses ennemis pour les entendre criéer de douleurs à cause des flammes.");
+		System.out.println("En premier vient le Paladin. Un être caractérisé par son honneur et sa vertu. Il se bât pour le bien et pour le préserver. ");
+		System.out.println("Adèpte d'un combat rapproché, il maîtrise son épée à la perfection.");
+		System.out.println("Le Guerrier est né en guerrier et mourra en guerrier. Avec sa lance, il enchaîne les batailles pour amasser toujours plus de ");
+		System.out.println("récompenses et de gloire, devenant ainsi la vedette de la taverne.");
+		System.out.println("L'Archer possède une agilité sans égale qui devrait le permettre de rester en sécurité loin de sa cible qu'il peut ensuite ");
+		System.out.println("aisément abattre d'une flèche. On dit qu'il pourrait toucher une pomme à 100m .");
+		System.out.println("Le Magicien maîtrise les éléments à la perfection. ");
+		System.out.println("Il prend donc un malin plaisir à jeter des boules de feu sur ses ennemis pour les entendre crier de douleur à cause des flammes.");
 		System.out.println();
 	}
-	public static void credit(){
-		System.out.println("Il y a eu qu'un vaincqueur évidement mais nous espérons que le jeu vous à plut à vous deux.");
+	private static void credit(){
+		System.out.println("Il y a eu qu'un vaincqueur mais nous espérons que le jeu vous à plu à vous deux.");
 		System.out.println();
-		System.out.println("Hésiter pas à rejouer et essayer les diverses configurations;");
+		System.out.println("N'hésitez pas à rejouer et à essayer d'autres configurations;");
 		System.out.println();
 		System.out.println("                    FIN                       ");
 		System.out.println();
 		System.out.println("-------------------CREDITS--------------------");
 		System.out.println();
 		System.out.println("          D'après une idée originale de:      ");
-		System.out.println("             Roland Ducros                    ");
-		System.out.println("             Aurélien Tournade                ");
-		System.out.println("             Benoit Deléglise                 ");
+		System.out.println("             Roland DUCROS                    ");
+		System.out.println("             Aurélien TOURNADE                ");
+		System.out.println("             Benoit DELEGLISE                 ");
 		System.out.println();
-		System.out.println("          Programmer par:                     ");
-		System.out.println("             Roland Ducros                    ");
-		System.out.println("             Aurélien Tournade                ");
-		System.out.println("             Benoit Deléglise                 ");
+		System.out.println("          Programmé par:                     ");
+		System.out.println("             Roland DUCROS                    ");
+		System.out.println("             Aurélien TOURNADE                ");
+		System.out.println("             Benoit DELEGLISE                 ");
 		System.out.println();
 		System.out.println("----------------------------------------------");
 
