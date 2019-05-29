@@ -6,7 +6,7 @@ class Jeu {
 		Scanner sc = new Scanner(System.in);
 		introduction();
 
-		//ajouter info création de personnage
+
 		Personnages joueur1 = Creationpers(1, 9, 5);
 		System.out.println(joueur1);
 		System.out.println();
@@ -21,7 +21,7 @@ class Jeu {
 		System.out.println("Que le combat commence !");
 		System.out.println();
 
-		//ajouter info sur le déroulement du jeu
+
 
 
 		if (joueur1.getIntelligence() < joueur2.getIntelligence()) {
@@ -38,14 +38,19 @@ class Jeu {
 
 		int a = 0;  //pourcentage de protection
 		int b = 0;  //dégats de la contre attaque
+		int c= 0; //choix d'action
 		while (joueursVivants(joueur1, joueur2)) {     //tant que les joueurs sont vivants
 
 			//tour du joueur 1
 
 			while ((joueur1.getAction() > 0) && joueursVivants(joueur1, joueur2)) {
 				System.out.println(joueur1.getNom() + " avez " + joueur1.getAction() + " points d'action");
-				System.out.println(joueur1.getNom() + " Que voulez vous faire ? se deplacer (1), se soigner (2), attaquer (3), se proteger (4) ? ");
-				switch (sc.nextInt()) {
+				c=0;
+				while((c<1 || c>4)) {
+					System.out.println(joueur1.getNom() + " Que voulez vous faire ? se deplacer (1), se soigner (2), attaquer (3), se proteger (4) ? ");
+					c = sc.nextInt();
+				}
+				switch (c) {
 					case 1:
 						p.bougeJoueur(joueur1, joueur2);
 						joueur1.perteAction(1);
@@ -96,7 +101,11 @@ class Jeu {
 
 			while ((joueur2.getAction() > 0) && joueursVivants(joueur1, joueur2)) {
 				System.out.println(joueur2.getNom() + " avez " + joueur2.getAction() + " points d'action");
-				System.out.println(joueur2.getNom() + " Que voulez vous faire ? se deplacer (1), se soigner (2), attaquer (3), se proteger (4)? ");
+				c=0;
+				while((c<1 || c>4)) {
+					System.out.println(joueur1.getNom() + " Que voulez vous faire ? se deplacer (1), se soigner (2), attaquer (3), se proteger (4) ? ");
+					c = sc.nextInt();
+				}
 				switch (sc.nextInt()) {
 					case 1:
 						p.bougeJoueur(joueur2, joueur1);
@@ -190,6 +199,7 @@ class Jeu {
 		String nom = sc.nextLine();
 		System.out.println();
 		presentationRace();
+		
 		System.out.println(" Voulez-vous jouer avec ");
 		System.out.println("un Elfe(1)");
 		System.out.println("un Homme(2)");
@@ -287,7 +297,7 @@ class Jeu {
 
 	private static void introduction() {
 		System.out.println();
-		System.out.println("Nous vous souhaitons la bienvenue dans x !");
+		System.out.println("Nous vous souhaitons la bienvenue dans Death Match !");
 		System.out.println();
 		System.out.println("Vous allez incarner un héros et vous battre à mort pour la gloire et la richesse");
 		System.out.println();
