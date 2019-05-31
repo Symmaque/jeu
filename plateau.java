@@ -157,14 +157,26 @@ class Plateau{
 		}
 	}
 
-	public void desaffichePortee(Personnages joueur1, Personnages joueur2){
+	public void desaffichePortee(){
 		for(int i=5; i<15; i++){
 			for(int j=5; j<15;j++){
 				this.monde[i][j]=' ';
 			}
 		}
-		this.monde[joueur1.getX()][joueur1.getY()]='1';
-		this.monde[joueur2.getX()][joueur2.getY()]='2';
+		this.monde[this.j1.getX()][this.j1.getY()]='1';
+		this.monde[this.j2.getX()][this.j2.getY()]='2';
+
+	}
+
+	public void comparaionIntelligence(Personnages joueur1, Personnages joueur2){
+		if(joueur1.getIntelligence()>joueur2.getIntelligence()) {
+			if (2 + (joueur1.getIntelligence() / (2 * joueur2.getIntelligence())) <= 5) {
+				joueur1.setAction(2 + (joueur1.getIntelligence() / (2 * joueur2.getIntelligence())));
+			} else {
+				joueur1.setAction(5);
+			}
+		}
+
 
 	}
 

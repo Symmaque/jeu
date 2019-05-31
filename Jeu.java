@@ -24,21 +24,15 @@ class Jeu {
 
 
 
-		if (joueur1.getIntelligence() < joueur2.getIntelligence()) {
-			joueur1.setAction(0);                                                                         //le plus intelligent commence
-		} else {
-			if (2 + (joueur1.getIntelligence() / (2 * joueur2.getIntelligence())) <= 3) {
-				joueur1.setAction(2 + (joueur1.getIntelligence() / (2 * joueur2.getIntelligence())));
-			} else {
-				joueur1.setAction(3);
-			}
-
-		}
+		if (joueur1.getIntelligence() <= joueur2.getIntelligence()) {
+			joueur1.setAction(0);
+		}                                                                 //le plus intelligent commence
+		p.comparaionIntelligence(joueur1,joueur2);
 
 
 		int a = 0;  //pourcentage de protection
 		int b = 0;  //dégats de la contre attaque
-		int c= 0; //choix d'action
+		int c; //choix d'action
 		while (joueursVivants(joueur1, joueur2)) {     //tant que les joueurs sont vivants
 
 			//tour du joueur 1
@@ -49,7 +43,7 @@ class Jeu {
 				while((c<1 || c>4)) {
 					System.out.println(joueur1.getNom() + " Que voulez vous faire ? se deplacer (1), se soigner (2), attaquer (3), se proteger (4) ? ");
 					c = sc.nextInt();
-				}
+			}
 				switch (c) {
 					case 1:
 						p.bougeJoueur(joueur1, joueur2);
@@ -65,7 +59,7 @@ class Jeu {
 							System.out.println(joueur2.getNom() + " n'est pas à votre portée");
 							p.affichePortee(joueur1);
 							affichePlateau(p);
-							p.desaffichePortee(joueur1, joueur2);
+							p.desaffichePortee();
 							break;
 						}
 
@@ -96,17 +90,21 @@ class Jeu {
 			}
 
 			//tour du 2eme joueur
+			if (joueur2.getIntelligence() <= joueur1.getIntelligence()) {
+				joueur2.setAction(2);
+			}
+			p.comparaionIntelligence(joueur2,joueur1);
 
-			joueur2.setAction(2 + (joueur2.getIntelligence() / (2 * joueur1.getIntelligence())));
+
 
 			while ((joueur2.getAction() > 0) && joueursVivants(joueur1, joueur2)) {
 				System.out.println(joueur2.getNom() + " avez " + joueur2.getAction() + " points d'action");
 				c=0;
 				while((c<1 || c>4)) {
-					System.out.println(joueur1.getNom() + " Que voulez vous faire ? se deplacer (1), se soigner (2), attaquer (3), se proteger (4) ? ");
+					System.out.println(joueur2.getNom() + " Que voulez vous faire ? se deplacer (1), se soigner (2), attaquer (3), se proteger (4) ? ");
 					c = sc.nextInt();
 				}
-				switch (sc.nextInt()) {
+				switch (c) {
 					case 1:
 						p.bougeJoueur(joueur2, joueur1);
 						joueur2.perteAction(1);
@@ -121,7 +119,7 @@ class Jeu {
 							System.out.println(joueur1.getNom() + " n'est pas à votre portée");
 							p.affichePortee(joueur2);
 							affichePlateau(p);
-							p.desaffichePortee(joueur1, joueur2);
+							p.desaffichePortee();
 							break;
 
 						}
@@ -135,7 +133,7 @@ class Jeu {
 						break;
 					case 4:
 						if (joueur2.getAction() != 1) {
-							System.out.println("Vous ne pouvez pas vous proteger maintenant, "+joueur1.getNom()+"  ne vous attaquera pas avant au moins un tour");
+							System.out.println("Vous ne pouvez pas vous proteger maintenant, "+joueur1.getNom()+"  ne vous attaquera pas avant au moins un tour"); // on ne peut se proteger que pour son dernier point d'action
 						} else {
 							a = joueur2.seproteger();
 							System.out.println("Vous vous protègerez de " + a + "% des dégats de la prochaine attaque");
@@ -153,7 +151,11 @@ class Jeu {
 
 			}
 
-			joueur1.setAction(2 + (joueur1.getIntelligence() / (2 * joueur2.getIntelligence())));
+
+			if (joueur1.getIntelligence() <= joueur2.getIntelligence()) {
+				joueur1.setAction(2);
+			}
+			p.comparaionIntelligence(joueur1,joueur2);
 
 		}
 
@@ -182,11 +184,6 @@ class Jeu {
 	}
 
 	private static Personnages Creationpers(int ordre, int x, int y) {
-		//fenetre fen1 = new fenetre(ordre);
-		//fen1.setTitle("Perso "+ordre);
-
-
-		//fen1.setVisible(true);
 		Scanner sc = new Scanner(System.in);
 		Race race;
 		Classe classe;
@@ -305,7 +302,7 @@ class Jeu {
 		System.out.println("Puis vous l'enverrez dans l'arène pour combattre le héros de votre adversaire. Le dernier debout gagne.");
 		System.out.println();
 		System.out.println("Il faut savoir que quatre caractéristiques définiront votre héros: la Force, la Dextérité, l'Intelligence et la Vie. ");
-		System.out.println("Chacune influe sur ses actions. Il est donc important de bien les défénir avec les choix qui vous seront proposés suivant votre style de jeu.");
+		System.out.println("Chacune influe sur ses actions. Il est donc important de bien les définir avec les choix qui vous seront proposés suivant votre style de jeu.");
 		System.out.println();
 		System.out.println("Commençons.");
 		System.out.println();
