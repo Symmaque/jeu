@@ -336,7 +336,7 @@ class Jeu {
 		System.out.println();
 	}
 	private static void credit(){
-		System.out.println("Il y a eu qu'un vaincqueur mais nous espérons que le jeu vous à plu à vous deux.");
+		System.out.println("Il y a eu qu'un vaincqueur mais nous espérons que le jeu vous a plu à vous deux.");
 		System.out.println();
 		System.out.println("N'hésitez pas à rejouer et à essayer d'autres configurations;");
 		System.out.println();
