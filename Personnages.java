@@ -56,7 +56,7 @@ class Personnages{
 		return dexterite;
 	}
 
-	private int getForce() {
+	public int getForce() {
 		return force;
 	}
 
